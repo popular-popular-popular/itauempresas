@@ -12,13 +12,24 @@
   --max:1280px;
 }
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;width:100%;min-height:100%;background:var(--navy)}
+html,body{margin:0;padding:0;width:100%;min-height:100%;background:#fff}
 body{
-  color:#fff;
+  color:#111;
   font-family:Arial,Helvetica,sans-serif;
   overflow-x:hidden;
 }
 button{font-family:inherit}
+
+/* ================= BLOQUE AZUL SUPERIOR ================= */
+.blue-section{
+  width:100%;
+  background:var(--navy);
+  color:#fff;
+  overflow:hidden;
+}
+.blue-section .page{
+  background:var(--navy);
+}
 
 .demo{
   position:fixed;z-index:100;top:8px;left:50%;
@@ -455,6 +466,7 @@ h1{
 <body>
 <div class="demo">MAQUETA DEMO · NO CAPTURA DATOS</div>
 
+<div class="blue-section">
 <header class="header">
   <div class="logo">itaú</div>
 
@@ -491,10 +503,12 @@ h1{
       alt="Fotografía de personas trabajando en un negocio"
     >
   </div>
+</main>
 
-  <div class="note">Prototipo visual únicamente.</div>
+</div>
 
 <!-- ================= SECCIÓN DESPUÉS DEL AZUL ================= -->
+
 <section class="info-section">
   <div class="info-inner">
     <img class="info-image" src="seccion-empresa.jpg"
@@ -518,6 +532,5 @@ h1{
   </div>
 </section>
 
-</main>
 </body>
 </html>
