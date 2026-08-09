@@ -2,45 +2,202 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#06143f">
 <title>Maqueta de acceso — DEMO</title>
 <style>
+:root{
+  --navy:#06143f;
+  --orange:#ff5b00;
+  --blue:#006b91;
+  --text:#555;
+  --border:#d2d2d2;
+}
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#fff;color:#555}
+html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#fff;color:var(--text)}
 body{min-height:100vh}
-.demo{position:fixed;z-index:20;top:10px;left:50%;transform:translateX(-50%);
-background:#b71c1c;color:#fff;padding:6px 14px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.5px}
-.header{height:149px;background:#06143f;display:flex;align-items:flex-start;position:relative;padding:24px 48px}
-.logo{width:95px;height:95px;background:#fff;border-radius:18px 18px 18px 18px;
-display:flex;align-items:center;justify-content:center;color:#07153e;font-size:36px;font-weight:700;letter-spacing:-2px}
-.top-login{position:absolute;left:255px;top:31px;width:255px;height:85px;border:2px solid #fff;border-radius:25px;
-color:#fff;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700}
-.close{position:absolute;right:35px;top:19px;width:50px;height:50px}
-.close:before,.close:after{content:"";position:absolute;left:24px;top:7px;height:39px;width:4px;background:#fff}
-.close:before{transform:rotate(45deg)} .close:after{transform:rotate(-45deg)}
-.search{position:absolute;right:125px;top:54px;width:38px;height:38px;border:4px solid #fff;border-radius:50%}
-.search:after{content:"";position:absolute;width:18px;height:4px;background:#fff;right:-13px;bottom:-7px;transform:rotate(45deg)}
+.demo{
+  position:fixed;z-index:100;top:10px;left:50%;transform:translateX(-50%);
+  background:#b71c1c;color:#fff;padding:6px 14px;border-radius:999px;
+  font-size:11px;font-weight:700;letter-spacing:.4px;white-space:nowrap
+}
+
+/* CABECERA */
+.header{
+  height:149px;background:var(--navy);position:relative;
+  display:flex;align-items:flex-start;padding:24px 48px
+}
+.logo{
+  width:95px;height:95px;background:#fff;border-radius:18px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--navy);font-size:36px;font-weight:700;letter-spacing:-2px
+}
+.top-login{
+  position:absolute;left:50%;top:31px;transform:translateX(-50%);
+  width:255px;height:85px;border:2px solid #fff;border-radius:25px;
+  color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:28px;font-weight:700
+}
+.close{
+  position:absolute;right:35px;top:19px;width:50px;height:50px
+}
+.close:before,.close:after{
+  content:"";position:absolute;left:24px;top:7px;height:39px;width:4px;background:#fff
+}
+.close:before{transform:rotate(45deg)}
+.close:after{transform:rotate(-45deg)}
+.search{
+  position:absolute;right:125px;top:54px;width:38px;height:38px;
+  border:4px solid #fff;border-radius:50%
+}
+.search:after{
+  content:"";position:absolute;width:18px;height:4px;background:#fff;
+  right:-13px;bottom:-7px;transform:rotate(45deg)
+}
 .menu{position:absolute;right:49px;top:56px;width:38px}
 .menu i{display:block;height:4px;background:#fff;margin:8px 0}
-.pointer{position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);
-width:0;height:0;border-left:20px solid transparent;border-right:20px solid transparent;border-bottom:20px solid #fff}
-.content{padding:69px 40px 80px;max-width:720px;margin:0 auto}
-.select,.field{width:100%;height:99px;border-radius:18px;border:2px solid #d3d3d3;background:#fff;
-padding:0 40px;font-size:29px;color:#999;display:flex;align-items:center}
-.select{border-color:#666;position:relative;margin-bottom:95px}
-.chevron{position:absolute;right:38px;top:36px;width:22px;height:22px;border-right:3px solid #555;border-bottom:3px solid #555;transform:rotate(45deg)}
+.pointer{
+  position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);
+  width:0;height:0;border-left:20px solid transparent;
+  border-right:20px solid transparent;border-bottom:20px solid #fff
+}
+
+/* CONTENIDO */
+.content{
+  width:min(100% - 80px, 640px);
+  margin:0 auto;
+  padding:69px 0 70px
+}
+.select,.field{
+  width:100%;height:99px;border-radius:18px;background:#fff;
+  border:2px solid var(--border);padding:0 40px;
+  font-size:29px;color:#999;display:flex;align-items:center
+}
+.select{
+  border-color:#666;position:relative;margin-bottom:95px
+}
+.chevron{
+  position:absolute;right:38px;top:34px;width:23px;height:23px;
+  border-right:3px solid #555;border-bottom:3px solid #555;
+  transform:rotate(45deg)
+}
 .field{margin-bottom:49px}
-.field input{width:100%;border:0;outline:0;font:inherit;color:#555;background:transparent}
+.field input{
+  width:100%;height:100%;border:0;outline:0;background:transparent;
+  font:inherit;color:#555
+}
 .field input::placeholder{color:#999}
-.btn{width:100%;height:119px;border:0;border-radius:18px;background:#ff5b00;color:#fff;
-font-size:29px;font-weight:700;margin-top:0;cursor:not-allowed}
-.links{font-size:28px;color:#006b91;margin-top:25px;line-height:1.65}
-.links div{margin-bottom:23px}
-.note{font-size:13px;color:#777;text-align:center;margin-top:35px}
-@media(max-width:600px){
- .header{height:149px;padding-left:48px}.top-login{left:255px}
- .content{padding:69px 40px}.select,.field{height:99px;font-size:25px}
- .btn{height:119px}.links{font-size:25px}
+.btn{
+  width:100%;height:119px;border:0;border-radius:18px;
+  background:var(--orange);color:#fff;font-size:29px;font-weight:700;
+  cursor:not-allowed
+}
+.links{
+  font-size:28px;color:var(--blue);margin-top:24px;line-height:1.5
+}
+.links div{margin-bottom:22px}
+.note{
+  font-size:12px;color:#777;text-align:center;margin-top:30px
+}
+
+/* TABLET */
+@media (max-width:900px){
+  .header{height:125px;padding:18px 30px}
+  .logo{width:82px;height:82px;font-size:31px;border-radius:16px}
+  .top-login{top:24px;width:220px;height:76px;font-size:25px}
+  .close{right:24px;top:14px}
+  .search{right:92px;top:45px;transform:scale(.9)}
+  .menu{right:28px;top:47px;transform:scale(.9)}
+  .content{width:min(100% - 56px,600px);padding-top:55px}
+  .select,.field{height:88px;font-size:25px}
+  .select{margin-bottom:65px}
+  .field{margin-bottom:32px}
+  .btn{height:100px;font-size:26px}
+  .links{font-size:24px}
+}
+
+/* MÓVIL */
+@media (max-width:600px){
+  .demo{top:6px;font-size:9px;padding:5px 10px}
+
+  .header{
+    height:92px;
+    padding:13px 16px;
+  }
+  .logo{
+    width:66px;height:66px;border-radius:14px;
+    font-size:26px;letter-spacing:-1.5px
+  }
+  .top-login{
+    left:50%;top:18px;
+    width:148px;height:56px;
+    border-radius:17px;font-size:20px
+  }
+  .close{
+    right:10px;top:11px;width:34px;height:34px
+  }
+  .close:before,.close:after{
+    left:16px;top:4px;height:28px;width:3px
+  }
+  .search{
+    right:59px;top:32px;width:25px;height:25px;
+    border-width:3px
+  }
+  .search:after{
+    width:12px;height:3px;right:-9px;bottom:-5px
+  }
+  .menu{
+    right:14px;top:30px;width:25px
+  }
+  .menu i{height:3px;margin:5px 0}
+  .pointer{
+    border-left-width:14px;border-right-width:14px;border-bottom-width:14px
+  }
+
+  .content{
+    width:calc(100% - 32px);
+    max-width:none;
+    padding:45px 0 40px
+  }
+  .select,.field{
+    height:62px;
+    border-radius:12px;
+    padding:0 22px;
+    font-size:18px
+  }
+  .select{
+    margin-bottom:57px
+  }
+  .chevron{
+    right:22px;top:20px;width:15px;height:15px;border-width:2px
+  }
+  .field{margin-bottom:28px}
+  .btn{
+    height:76px;border-radius:12px;
+    font-size:21px
+  }
+  .links{
+    margin-top:18px;
+    font-size:18px;
+    line-height:1.45
+  }
+  .links div{margin-bottom:17px}
+  .note{font-size:10px;margin-top:25px}
+}
+
+/* TELÉFONOS MUY PEQUEÑOS */
+@media (max-width:380px){
+  .header{height:82px;padding:10px 12px}
+  .logo{width:58px;height:58px;font-size:23px}
+  .top-login{top:15px;width:132px;height:50px;font-size:18px}
+  .search{right:51px;top:28px}
+  .menu{right:10px;top:26px}
+  .content{width:calc(100% - 24px);padding-top:35px}
+  .select,.field{height:57px;font-size:16px}
+  .select{margin-bottom:45px}
+  .field{margin-bottom:22px}
+  .btn{height:68px;font-size:19px}
+  .links{font-size:16px}
 }
 </style>
 </head>
@@ -50,18 +207,27 @@ font-size:29px;font-weight:700;margin-top:0;cursor:not-allowed}
 <header class="header">
   <div class="logo">itaú</div>
   <div class="top-login">Ingresar</div>
-  <div class="close"></div>
-  <div class="search"></div>
-  <div class="menu"><i></i><i></i><i></i></div>
-  <div class="pointer"></div>
+  <div class="close" aria-hidden="true"></div>
+  <div class="search" aria-hidden="true"></div>
+  <div class="menu" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="pointer" aria-hidden="true"></div>
 </header>
 
 <main class="content">
-  <div class="select">Empresas <span class="chevron"></span></div>
+  <div class="select">
+    Empresas
+    <span class="chevron"></span>
+  </div>
 
-  <div class="field"><input aria-label="RUT/No. Cliente" placeholder="RUT/No. Cliente" disabled></div>
-  <div class="field"><input aria-label="Usuario" placeholder="Usuario" disabled></div>
-  <div class="field"><input aria-label="Contraseña" placeholder="Contraseña" type="password" disabled></div>
+  <div class="field">
+    <input aria-label="RUT/No. Cliente" placeholder="RUT/No. Cliente" disabled>
+  </div>
+  <div class="field">
+    <input aria-label="Usuario" placeholder="Usuario" disabled>
+  </div>
+  <div class="field">
+    <input aria-label="Contraseña" placeholder="Contraseña" type="password" disabled>
+  </div>
 
   <button class="btn" disabled>Ingresar</button>
 
