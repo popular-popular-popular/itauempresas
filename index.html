@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maqueta de acceso — DEMO</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#fff;color:#555}
+body{min-height:100vh}
+.demo{position:fixed;z-index:20;top:10px;left:50%;transform:translateX(-50%);
+background:#b71c1c;color:#fff;padding:6px 14px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.5px}
+.header{height:149px;background:#06143f;display:flex;align-items:flex-start;position:relative;padding:24px 48px}
+.logo{width:95px;height:95px;background:#fff;border-radius:18px 18px 18px 18px;
+display:flex;align-items:center;justify-content:center;color:#07153e;font-size:36px;font-weight:700;letter-spacing:-2px}
+.top-login{position:absolute;left:255px;top:31px;width:255px;height:85px;border:2px solid #fff;border-radius:25px;
+color:#fff;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700}
+.close{position:absolute;right:35px;top:19px;width:50px;height:50px}
+.close:before,.close:after{content:"";position:absolute;left:24px;top:7px;height:39px;width:4px;background:#fff}
+.close:before{transform:rotate(45deg)} .close:after{transform:rotate(-45deg)}
+.search{position:absolute;right:125px;top:54px;width:38px;height:38px;border:4px solid #fff;border-radius:50%}
+.search:after{content:"";position:absolute;width:18px;height:4px;background:#fff;right:-13px;bottom:-7px;transform:rotate(45deg)}
+.menu{position:absolute;right:49px;top:56px;width:38px}
+.menu i{display:block;height:4px;background:#fff;margin:8px 0}
+.pointer{position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);
+width:0;height:0;border-left:20px solid transparent;border-right:20px solid transparent;border-bottom:20px solid #fff}
+.content{padding:69px 40px 80px;max-width:720px;margin:0 auto}
+.select,.field{width:100%;height:99px;border-radius:18px;border:2px solid #d3d3d3;background:#fff;
+padding:0 40px;font-size:29px;color:#999;display:flex;align-items:center}
+.select{border-color:#666;position:relative;margin-bottom:95px}
+.chevron{position:absolute;right:38px;top:36px;width:22px;height:22px;border-right:3px solid #555;border-bottom:3px solid #555;transform:rotate(45deg)}
+.field{margin-bottom:49px}
+.field input{width:100%;border:0;outline:0;font:inherit;color:#555;background:transparent}
+.field input::placeholder{color:#999}
+.btn{width:100%;height:119px;border:0;border-radius:18px;background:#ff5b00;color:#fff;
+font-size:29px;font-weight:700;margin-top:0;cursor:not-allowed}
+.links{font-size:28px;color:#006b91;margin-top:25px;line-height:1.65}
+.links div{margin-bottom:23px}
+.note{font-size:13px;color:#777;text-align:center;margin-top:35px}
+@media(max-width:600px){
+ .header{height:149px;padding-left:48px}.top-login{left:255px}
+ .content{padding:69px 40px}.select,.field{height:99px;font-size:25px}
+ .btn{height:119px}.links{font-size:25px}
+}
+</style>
+</head>
+<body>
+<div class="demo">MAQUETA DEMO · NO CAPTURA DATOS</div>
+
+<header class="header">
+  <div class="logo">itaú</div>
+  <div class="top-login">Ingresar</div>
+  <div class="close"></div>
+  <div class="search"></div>
+  <div class="menu"><i></i><i></i><i></i></div>
+  <div class="pointer"></div>
+</header>
+
+<main class="content">
+  <div class="select">Empresas <span class="chevron"></span></div>
+
+  <div class="field"><input aria-label="RUT/No. Cliente" placeholder="RUT/No. Cliente" disabled></div>
+  <div class="field"><input aria-label="Usuario" placeholder="Usuario" disabled></div>
+  <div class="field"><input aria-label="Contraseña" placeholder="Contraseña" type="password" disabled></div>
+
+  <button class="btn" disabled>Ingresar</button>
+
+  <div class="links">
+    <div>Adherirse a Itaú/Link Empresa ›</div>
+    <div>Olvidé mi contraseña ›</div>
+  </div>
+
+  <div class="note">Prototipo visual únicamente. Los campos y botones están deshabilitados.</div>
+</main>
+</body>
+</html>
