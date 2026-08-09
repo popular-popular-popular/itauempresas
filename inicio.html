@@ -9,191 +9,389 @@
 :root{
   --navy:#06143f;
   --white:#fff;
+  --max:1280px;
 }
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;background:var(--navy);color:var(--white);
-font-family:Arial,Helvetica,sans-serif}
-body{min-height:100vh}
+html,body{margin:0;padding:0;width:100%;min-height:100%;background:var(--navy)}
+body{
+  color:#fff;
+  font-family:Arial,Helvetica,sans-serif;
+  overflow-x:hidden;
+}
+button{font-family:inherit}
+
 .demo{
-  position:fixed;z-index:100;top:9px;left:50%;transform:translateX(-50%);
-  background:#b71c1c;color:#fff;border-radius:999px;padding:5px 12px;
-  font:700 10px Arial,sans-serif;letter-spacing:.3px;white-space:nowrap
+  position:fixed;z-index:100;top:8px;left:50%;
+  transform:translateX(-50%);
+  padding:5px 12px;border-radius:20px;
+  background:#b71c1c;color:#fff;
+  font-size:10px;font-weight:700;
+  white-space:nowrap;
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
 .header{
-  height:145px;position:relative;width:100%;padding:27px 52px
+  width:100%;
+  height:145px;
+  padding:28px 5vw;
+  position:relative;
 }
 .logo{
-  width:108px;height:108px;border-radius:22px;background:#fff;
-  color:var(--navy);display:flex;align-items:center;justify-content:center;
-  font-size:39px;font-weight:700;letter-spacing:-2px
+  width:108px;height:108px;
+  border-radius:22px;
+  background:#fff;color:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  font-size:39px;font-weight:700;
+  letter-spacing:-2px;
 }
 .login{
-  position:absolute;left:50%;top:40px;transform:translateX(-50%);
-  width:280px;height:91px;border:2px solid #fff;border-radius:26px;
-  display:flex;align-items:center;justify-content:center;gap:25px;
-  font-size:28px;font-weight:700
+  position:absolute;
+  top:40px;left:50%;
+  transform:translateX(-50%);
+  width:280px;height:82px;
+  border:2px solid #fff;border-radius:26px;
+  display:flex;align-items:center;justify-content:center;
+  gap:24px;
+  font-size:23px;font-weight:700;
 }
 .user-icon{
-  width:35px;height:22px;border:4px solid #fff;border-radius:7px;
-  position:relative;margin-top:18px
+  position:relative;
+  width:34px;height:21px;
+  border:4px solid #fff;border-radius:7px;
+  margin-top:17px;
 }
 .user-icon:before{
-  content:"";position:absolute;width:13px;height:13px;border:4px solid #fff;
-  border-radius:50%;left:7px;top:-24px;background:var(--navy)
+  content:"";
+  position:absolute;
+  width:13px;height:13px;
+  border:4px solid #fff;
+  border-radius:50%;
+  left:6px;top:-24px;
+  background:var(--navy);
 }
 .search{
-  position:absolute;right:126px;top:65px;width:39px;height:39px;
-  border:4px solid #fff;border-radius:50%
+  position:absolute;
+  right:11%;
+  top:65px;
+  width:39px;height:39px;
+  border:4px solid #fff;border-radius:50%;
 }
 .search:after{
-  content:"";position:absolute;width:20px;height:4px;background:#fff;
-  right:-15px;bottom:-8px;transform:rotate(48deg);border-radius:3px
+  content:"";
+  position:absolute;
+  width:20px;height:4px;
+  right:-15px;bottom:-8px;
+  background:#fff;border-radius:3px;
+  transform:rotate(48deg);
 }
-.menu{position:absolute;right:53px;top:67px;width:42px}
-.menu i{display:block;height:4px;background:#fff;margin:8px 0;border-radius:3px}
+.menu{
+  position:absolute;
+  right:5%;
+  top:67px;
+  width:42px;
+}
+.menu i{
+  display:block;
+  height:4px;
+  margin:8px 0;
+  border-radius:3px;
+  background:#fff;
+}
 
-/* HERO */
+/* ================= CONTENIDO ================= */
+.page{
+  width:100%;
+  padding:clamp(50px,8vw,115px) 5vw 0;
+}
 .hero{
-  width:min(100% - 90px, 1300px);
-  margin:95px auto 0;
+  width:100%;
+  max-width:var(--max);
+  margin:0 auto;
 }
 h1{
-  margin:0;max-width:1000px;
-  font-size:66px;line-height:1.28;letter-spacing:-1.5px
+  margin:0;
+  max-width:1050px;
+  font-size:clamp(34px,4.2vw,54px);
+  line-height:1.24;
+  letter-spacing:-1.5px;
+  font-weight:700;
 }
 .lead{
-  margin:34px 0 51px;max-width:1010px;
-  font-size:48px;line-height:1.48;letter-spacing:.2px
+  margin:34px 0 50px;
+  max-width:1050px;
+  font-size:clamp(22px,2.8vw,36px);
+  line-height:1.48;
+  letter-spacing:.1px;
 }
 .cta{
-  width:605px;height:128px;border:2px solid #fff;border-radius:25px;
-  background:transparent;color:#fff;font-size:35px;font-weight:700;
-  cursor:not-allowed
+  width:min(605px,100%);
+  height:88px;
+  border:2px solid #fff;
+  border-radius:25px;
+  background:transparent;
+  color:#fff;
+  font-size:clamp(20px,2.1vw,29px);
+  font-weight:700;
+  cursor:not-allowed;
 }
-
-/* FOTO */
 .photo-wrap{
-  width:min(100% - 90px, 1300px);
-  margin:125px auto 0;
+  width:100%;
+  max-width:var(--max);
+  margin:clamp(85px,10vw,140px) auto 0;
+  border-radius:clamp(75px,13vw,180px) clamp(75px,13vw,180px) 0 0;
   overflow:hidden;
-  border-radius:180px 180px 0 0;
-  background:#ccc
 }
 .photo{
-  width:100%;display:block;
+  display:block;
+  width:100%;
   height:auto;
-  object-fit:cover
 }
-.note{text-align:center;color:#aaa;font-size:11px;margin:15px 0 25px}
-
-/* DESKTOP */
-@media(min-width:1200px){
-  .hero{margin-top:90px}
-  .photo-wrap{margin-top:130px}
+.note{
+  text-align:center;
+  color:#aaa;
+  font-size:11px;
+  padding:12px 0 24px;
 }
 
-/* TABLET */
-@media(max-width:1000px){
-  .header{height:120px;padding:20px 30px}
-  .logo{width:82px;height:82px;font-size:31px;border-radius:17px}
-  .login{top:30px;width:235px;height:74px;font-size:24px;border-radius:21px;gap:18px}
-  .search{right:92px;top:50px;transform:scale(.88)}
-  .menu{right:30px;top:51px;transform:scale(.88)}
-  .hero{width:calc(100% - 60px);margin-top:65px}
-  h1{font-size:50px}
-  .lead{font-size:35px;margin:28px 0 40px}
-  .cta{width:520px;max-width:100%;height:105px;font-size:29px;border-radius:21px}
-  .photo-wrap{width:calc(100% - 60px);margin-top:90px;border-radius:110px 110px 0 0}
+/* ================= PC GRANDE ================= */
+@media (min-width:1200px){
+  .header{padding-left:5vw;padding-right:5vw}
+  .page{padding-top:95px}
+  .hero{max-width:1280px}
+  .photo-wrap{max-width:1280px}
 }
 
-/* MOBILE */
-@media(max-width:600px){
-  .demo{top:5px;font-size:8px;padding:4px 9px}
-  .header{height:106px;padding:22px 16px}
-  .logo{width:78px;height:78px;border-radius:17px;font-size:30px}
+/* ================= TABLET ================= */
+@media (max-width:900px){
+  .header{
+    height:120px;
+    padding:20px 30px;
+  }
+  .logo{
+    width:82px;height:82px;
+    font-size:31px;border-radius:17px;
+  }
   .login{
-    top:31px;width:180px;height:58px;border-radius:18px;
-    font-size:20px;gap:16px
+    top:30px;
+    width:235px;height:74px;
+    border-radius:21px;
+    font-size:20px;
+    gap:18px;
   }
-  .user-icon{width:27px;height:18px;border-width:3px;margin-top:13px}
-  .user-icon:before{width:10px;height:10px;border-width:3px;left:6px;top:-19px}
-  .search{right:59px;top:46px;width:28px;height:28px;border-width:3px}
-  .search:after{width:14px;height:3px;right:-10px;bottom:-6px}
-  .menu{right:14px;top:47px;width:29px}
-  .menu i{height:3px;margin:6px 0}
-
-  .hero{
-    width:calc(100% - 46px);
-    margin-top:80px
+  .search{
+    right:92px;top:50px;
+    transform:scale(.88);
   }
-  h1{
-    max-width:none;
-    font-size:42px;
-    line-height:1.25;
-    letter-spacing:-.8px
+  .menu{
+    right:30px;top:51px;
+    transform:scale(.88);
   }
+  .page{
+    padding:65px 30px 0;
+  }
+  h1{font-size:42px}
   .lead{
-    margin:30px 0 42px;
-    font-size:28px;
-    line-height:1.5
+    font-size:29px;
+    margin:28px 0 40px;
   }
   .cta{
-    width:100%;height:91px;
-    border-radius:20px;
-    font-size:25px
+    height:88px;
+    border-radius:21px;
   }
   .photo-wrap{
-    width:calc(100% - 44px);
-    margin-top:105px;
-    border-radius:105px 105px 0 0
-  }
-  .photo{
-    min-height:470px;
-    object-fit:cover;
-    object-position:center top
+    margin-top:90px;
+    border-radius:110px 110px 0 0;
   }
 }
 
-/* MOBILE MUY PEQUEÑO */
-@media(max-width:380px){
-  .header{height:92px;padding:17px 12px}
+/* ================= MOVIL ================= */
+@media (max-width:600px){
+  .demo{
+    top:5px;
+    padding:4px 9px;
+    font-size:8px;
+  }
+
+  .header{
+    height:106px;
+    padding:22px 16px;
+  }
+  .logo{
+    width:78px;height:78px;
+    border-radius:17px;
+    font-size:30px;
+  }
+  .login{
+    top:31px;
+    width:170px;height:54px;
+    border-radius:17px;
+    font-size:18px;
+    gap:16px;
+  }
+  .user-icon{
+    width:27px;height:18px;
+    border-width:3px;
+    margin-top:13px;
+  }
+  .user-icon:before{
+    width:10px;height:10px;
+    border-width:3px;
+    left:6px;top:-19px;
+  }
+  .search{
+    right:59px;top:46px;
+    width:28px;height:28px;
+    border-width:3px;
+  }
+  .search:after{
+    width:14px;height:3px;
+    right:-10px;bottom:-6px;
+  }
+  .menu{
+    right:14px;top:47px;
+    width:29px;
+  }
+  .menu i{
+    height:3px;
+    margin:6px 0;
+  }
+
+  .page{
+    padding:72px 23px 0;
+  }
+  .hero{
+    max-width:none;
+  }
+
+  h1{
+    font-size:34px;
+    line-height:1.25;
+    letter-spacing:-.8px;
+  }
+
+  .lead{
+    margin:25px 0 36px;
+    font-size:22px;
+    line-height:1.5;
+  }
+
+  .cta{
+    width:100%;
+    height:82px;
+    border-radius:20px;
+    font-size:22px;
+  }
+
+  .photo-wrap{
+    width:100%;
+    margin-top:105px;
+    border-radius:105px 105px 0 0;
+  }
+  .photo{
+    width:100%;
+    height:auto;
+    min-height:0;
+    object-fit:cover;
+  }
+
+  .desktop-break{display:none}
+}
+
+/* ================= MOVIL PEQUEÑO ================= */
+@media (max-width:380px){
+  .header{
+    height:92px;
+    padding:17px 12px;
+  }
+  .logo{
+    width:64px;height:64px;
+    font-size:22px;
+  }
+  .login{
+    top:26px;
+    width:155px;height:51px;
+    font-size:17px;
+  }
+  .search{
+    right:51px;top:39px;
+    transform:scale(.82);
+  }
+  .menu{
+    right:10px;top:40px;
+    transform:scale(.82);
+  }
+
+  .page{
+    padding:65px 16px 0;
+  }
+  h1{font-size:29px}
+  .lead{
+    font-size:20px;
+    margin:25px 0 34px;
+  }
+  .cta{
+    height:78px;
+    font-size:19px;
+  }
+  .photo-wrap{
+    margin-top:80px;
+    border-radius:75px 75px 0 0;
+  }
+}
+
+/* ================= ORIENTACION HORIZONTAL MOVIL ================= */
+@media (max-height:500px) and (orientation:landscape){
+  .header{height:90px;padding:12px 20px}
   .logo{width:64px;height:64px;font-size:25px}
-  .login{top:26px;width:155px;height:51px;font-size:18px}
-  .search{right:51px;top:39px;transform:scale(.82)}
-  .menu{right:10px;top:40px;transform:scale(.82)}
-  .hero{width:calc(100% - 32px);margin-top:65px}
-  h1{font-size:35px}
-  .lead{font-size:24px;margin:25px 0 34px}
-  .cta{height:78px;font-size:21px}
-  .photo-wrap{width:calc(100% - 30px);margin-top:80px;border-radius:75px 75px 0 0}
+  .login{top:18px;height:54px;width:180px}
+  .search{top:35px}
+  .menu{top:36px}
+  .page{padding-top:35px}
+  .photo-wrap{margin-top:70px}
 }
 </style>
 </head>
+
 <body>
 <div class="demo">MAQUETA DEMO · NO CAPTURA DATOS</div>
 
 <header class="header">
   <div class="logo">itaú</div>
+
   <div class="login">
     <span>Ingresar</span>
     <span class="user-icon" aria-hidden="true"></span>
   </div>
+
   <div class="search" aria-hidden="true"></div>
-  <div class="menu" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <div class="menu" aria-hidden="true">
+    <i></i><i></i><i></i>
+  </div>
 </header>
 
-<main>
+<main class="page">
   <section class="hero">
     <h1>Cuenta bancaria para<br class="desktop-break"> empresas en Itaú</h1>
-    <p class="lead">La cuenta para gestionar y<br class="desktop-break"> hacer crecer tu empresa, con<br class="desktop-break"> soluciones financieras para<br class="desktop-break"> cada etapa de tu negocio.</p>
+
+    <p class="lead">
+      La cuenta para gestionar y<br class="desktop-break">
+      hacer crecer tu empresa, con<br class="desktop-break">
+      soluciones financieras para<br class="desktop-break">
+      cada etapa de tu negocio.
+    </p>
+
     <button class="cta" disabled>Abrir mi cuenta empresa</button>
   </section>
 
   <div class="photo-wrap">
-    <img class="photo" src="hero-empresa.jpg" alt="Fotografía de personas trabajando en un negocio">
+    <img
+      class="photo"
+      src="hero-empresa.jpg"
+      alt="Fotografía de personas trabajando en un negocio"
+    >
   </div>
+
   <div class="note">Prototipo visual únicamente.</div>
 </main>
 </body>
