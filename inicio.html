@@ -349,6 +349,106 @@ h1{
   .page{padding-top:35px}
   .photo-wrap{margin-top:70px}
 }
+
+/* ================= SECCIÓN BLANCA INFERIOR ================= */
+.info-section{
+  width:100%;
+  background:#fff;
+  color:#111;
+  padding:34px 5vw 70px;
+}
+.info-inner{
+  width:100%;
+  max-width:var(--max);
+  margin:0 auto;
+}
+.info-image{
+  width:100%;
+  display:block;
+  border-radius:32px;
+  object-fit:cover;
+}
+.info-block{
+  margin-top:66px;
+}
+.info-block + .info-block{
+  margin-top:68px;
+}
+.info-title{
+  margin:0 0 35px;
+  font-size:clamp(31px,3.2vw,44px);
+  line-height:1.15;
+  font-weight:700;
+}
+.info-text{
+  margin:0;
+  max-width:1120px;
+  font-size:clamp(22px,2.45vw,32px);
+  line-height:1.48;
+  color:#555;
+}
+.info-cta{
+  display:block;
+  width:min(540px,100%);
+  height:92px;
+  margin-top:70px;
+  border:0;
+  border-radius:18px;
+  background:#ff5b00;
+  color:#fff;
+  font-size:clamp(22px,2.2vw,30px);
+  font-weight:700;
+  cursor:not-allowed;
+}
+@media(max-width:900px){
+  .info-section{padding:28px 30px 55px}
+  .info-image{border-radius:26px}
+  .info-block{margin-top:52px}
+  .info-block + .info-block{margin-top:56px}
+  .info-title{font-size:36px;margin-bottom:27px}
+  .info-text{font-size:26px}
+  .info-cta{height:84px;margin-top:55px}
+}
+@media(max-width:600px){
+  .info-section{
+    padding:24px 38px 28px;
+  }
+  .info-image{
+    border-radius:20px;
+    width:100%;
+    aspect-ratio:1.52/1;
+    object-fit:cover;
+  }
+  .info-block{
+    margin-top:67px;
+  }
+  .info-block + .info-block{
+    margin-top:66px;
+  }
+  .info-title{
+    font-size:34px;
+    line-height:1.15;
+    margin-bottom:40px;
+  }
+  .info-text{
+    font-size:24px;
+    line-height:1.5;
+  }
+  .info-cta{
+    width:100%;
+    height:76px;
+    margin-top:68px;
+    border-radius:16px;
+    font-size:21px;
+  }
+}
+@media(max-width:380px){
+  .info-section{padding-left:22px;padding-right:22px}
+  .info-title{font-size:30px}
+  .info-text{font-size:21px}
+  .info-cta{font-size:19px;height:70px}
+}
+
 </style>
 </head>
 
@@ -393,6 +493,31 @@ h1{
   </div>
 
   <div class="note">Prototipo visual únicamente.</div>
+
+<!-- ================= SECCIÓN DESPUÉS DEL AZUL ================= -->
+<section class="info-section">
+  <div class="info-inner">
+    <img class="info-image" src="seccion-empresa.jpg"
+         alt="Personas trabajando en una tienda">
+
+    <div class="info-block">
+      <h2 class="info-title">¿Qué es?</h2>
+      <p class="info-text">
+        Una cuenta para gestionar y hacer crecer tu empresa, con soluciones financieras para cada etapa de tu negocio.
+      </p>
+    </div>
+
+    <div class="info-block">
+      <h2 class="info-title">¿Para qué sirve?</h2>
+      <p class="info-text">
+        Te permite organizar las finanzas de cualquier tipo de empresa. Llevar la operativa del negocio de forma ágil con acceso a productos financieros y canales digitales.
+      </p>
+    </div>
+
+    <button class="info-cta" disabled>Abrir mi cuenta empresa</button>
+  </div>
+</section>
+
 </main>
 </body>
 </html>
