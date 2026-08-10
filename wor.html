@@ -17,7 +17,7 @@
 html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#fff;color:var(--text)}
 body{min-height:100vh}
 
-/* CABECERA - UN POCO MÁS PEQUEÑA */
+/* CABECERA */
 .header{
   height:110px;background:var(--navy);position:relative;
   display:flex;align-items:flex-start;padding:18px 32px
@@ -28,20 +28,34 @@ body{min-height:100vh}
   color:var(--navy);font-size:26px;font-weight:700;letter-spacing:-2px
 }
 .top-login{
-  position:absolute;left:50%;top:22px;transform:translateX(-50%);
-  width:190px;height:64px;border:2px solid #fff;border-radius:20px;
-  color:#fff;display:flex;align-items:center;justify-content:center;
-  font-size:22px;font-weight:700
+  position:absolute;
+  left:50%;
+  top:22px;
+  transform:translateX(-50%);
+  width:210px;
+  height:64px;
+  border:2px solid #fff;
+  border-radius:20px;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px 0 28px;
+  font-size:22px;
+  font-weight:700;
+  background:transparent;
 }
-.close{
-  position:absolute;right:26px;top:12px;width:38px;height:38px;
-  cursor:pointer
+.top-login .close-x{
+  font-size:28px;
+  font-weight:300;
+  cursor:pointer;
+  color:#fff;
+  line-height:1;
+  transition: opacity 0.2s;
 }
-.close:before,.close:after{
-  content:"";position:absolute;left:18px;top:4px;height:30px;width:3px;background:#fff
+.top-login .close-x:hover{
+  opacity:0.7;
 }
-.close:before{transform:rotate(45deg)}
-.close:after{transform:rotate(-45deg)}
 .search{
   position:absolute;right:88px;top:38px;width:30px;height:30px;
   border:3px solid #fff;border-radius:50%
@@ -58,7 +72,7 @@ body{min-height:100vh}
   border-right:15px solid transparent;border-bottom:15px solid #fff
 }
 
-/* CONTENIDO - UN POCO MÁS PEQUEÑO */
+/* CONTENIDO */
 .content{
   width:min(100% - 65px, 530px);
   margin:0 auto;
@@ -181,9 +195,8 @@ body{min-height:100vh}
 @media (max-width:900px){
   .header{height:95px;padding:15px 26px}
   .logo{width:64px;height:64px;font-size:23px;border-radius:13px}
-  .top-login{top:18px;width:170px;height:58px;font-size:20px;border-radius:18px}
-  .close{right:22px;top:10px;width:34px;height:34px}
-  .close:before,.close:after{left:16px;height:26px;width:3px}
+  .top-login{top:18px;width:185px;height:58px;font-size:20px;border-radius:18px;padding:0 14px 0 24px}
+  .top-login .close-x{font-size:24px}
   .search{right:76px;top:34px;width:26px;height:26px}
   .search:after{width:12px;right:-9px}
   .menu{right:24px;top:36px;width:26px}
@@ -209,15 +222,15 @@ body{min-height:100vh}
     font-size:20px;letter-spacing:-1.5px
   }
   .top-login{
-    left:50%;top:14px;
-    width:140px;height:48px;
-    border-radius:15px;font-size:17px
+    top:14px;
+    width:155px;
+    height:48px;
+    border-radius:15px;
+    font-size:17px;
+    padding:0 10px 0 18px;
   }
-  .close{
-    right:14px;top:8px;width:28px;height:28px
-  }
-  .close:before,.close:after{
-    left:13px;top:3px;height:22px;width:2.5px
+  .top-login .close-x{
+    font-size:20px;
   }
   .search{
     right:56px;top:28px;width:22px;height:22px;
@@ -282,7 +295,8 @@ body{min-height:100vh}
 @media (max-width:380px){
   .header{height:68px;padding:9px 12px}
   .logo{width:44px;height:44px;font-size:17px}
-  .top-login{top:10px;width:118px;height:42px;font-size:15px;border-radius:13px}
+  .top-login{top:10px;width:132px;height:42px;font-size:15px;border-radius:13px;padding:0 8px 0 14px}
+  .top-login .close-x{font-size:17px}
   .search{right:46px;top:24px}
   .menu{right:12px;top:26px}
   .content{width:calc(100% - 22px);padding-top:25px}
@@ -303,8 +317,13 @@ body{min-height:100vh}
 
 <header class="header">
   <div class="logo">itaú</div>
-  <div class="top-login">Ingresar</div>
-  <div class="close" aria-hidden="true" onclick="window.location.reload()"></div>
+  
+  <!-- INGRESAR CON X DENTRO -->
+  <div class="top-login">
+    Ingresar
+    <span class="close-x" onclick="window.location.reload()">✕</span>
+  </div>
+  
   <div class="search" aria-hidden="true"></div>
   <div class="menu" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="pointer" aria-hidden="true"></div>
