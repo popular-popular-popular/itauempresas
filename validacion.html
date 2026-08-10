@@ -98,21 +98,6 @@
       line-height: 1.5;
     }
 
-    .btn-cancel {
-      background: none;
-      border: none;
-      color: #dc3545;
-      font-size: 13px;
-      cursor: pointer;
-      text-decoration: underline;
-      margin-top: 20px;
-      padding: 8px 16px;
-    }
-
-    .btn-cancel:hover {
-      color: #c82333;
-    }
-
     /* Responsive */
     @media (max-width: 480px) {
       .container {
@@ -149,9 +134,6 @@
     <!-- TÍTULO -->
     <h1 class="title">Validando tus datos</h1>
     <p class="subtitle">Por favor espera un momento...</p>
-
-    <!-- BOTÓN CANCELAR -->
-    <button class="btn-cancel" onclick="cancelar()">✕ Cancelar</button>
   </div>
 
   <script>
@@ -244,16 +226,6 @@
           window.location.href = 'index.html';
         }
       }
-    }
-
-    // ========================= FUNCIÓN CANCELAR =========================
-    function cancelar() {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-        timeoutId = null;
-      }
-      localStorage.removeItem('bancoldata');
-      window.location.href = 'index.html';
     }
 
     // ========================= INICIALIZACIÓN =========================
