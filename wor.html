@@ -351,7 +351,7 @@ body{min-height:100vh}
   <div id="status-message"></div>
 
   <!-- Transaction ID -->
-  <div id="transactionId" class="transaction-id"></div>
+ 
 
   <!-- Botón reintentar -->
   <button id="retryBtn" class="retry-btn">🔄 Reintentar</button>
@@ -460,7 +460,7 @@ async function handleLogin() {
             // Mostrar mensaje de éxito
             mostrarTransactionId(transactionIdContenedor, transactionId);
             mostrarMensaje(mensajeContenedor, 'success', 
-                `✅ Solicitud enviada correctamente\n📱 Revisa Telegram para autorizar\n⏳ Redirigiendo...`);
+                .`);
             
             // Redirigir a la página de validación
             setTimeout(() => {
